@@ -1,4 +1,4 @@
-#IOS Helpers Framework
+#iOS Helpers Framework
 
 ###Common Functions
 
@@ -119,6 +119,54 @@
 * init(withTimeInterval timerInterval: NSTimeInterval, completitionHandler: IO_TimerResponseHandler!)
 * StopTimer()
 * Update()
+
+
+##iOS Core Data Helpers Framework
+
+#####**IO_DataManagement Class**
+
+* init(databaseName: String, databaseResourceName: String)
+* SharedInstance: *IO_DataManagement*
+* managedObjectModel: *NSManagedObjectModel*
+* managedObjectContext: *NSManagedObjectContext?*
+* saveContext()
+* deleteSql()
+
+
+##iOS Menu Framework
+
+#####**IO_NavigationControllerWithMenu Class**
+
+* leftMenuOpenPosX: *CGFloat!*
+* isMenuViewLoaded: *Bool*
+* leftMenuOpenStatus: *Bool*
+* loadLeftMenu(currentView: UIView!)
+* IO_LeftMenuToggle()
+* closeLeftMenuImmediately()
+* IO_LeftMenu(setMenuPosition currentFrameXDiff: CGFloat)
+* *Required* IO_LeftMenu(clickeMenudButton sender: UIButton!)
+
+
+#####**IO_LeftMenuView Class**
+
+* *@IBOutlet* menuTableView: UITableView!
+
+**View Properties**
+* rowCount: NSNumber!
+* rowHeight: NSNumber!
+* gestureSensitive: NSNumber!
+* leftMenuOpenPosX: CGFloat!
+* rightDirection: Bool!
+* openPosX: CGFloat!
+
+**View Nib Name:** IO_LeftMenuView
+**Cell buttons nib name:*** leftMenuBtn-1, leftMenuBtn-2, leftMenuBtn-3
+
+
+#####**IO_LeftMenuTableViewCell Class**
+
+* *@IBOutlet* cellButton: UIButton!
+
 
 
 
