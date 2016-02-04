@@ -1,0 +1,127 @@
+#IOS Helpers Framework
+
+###Common Functions
+
+#####**IO_Helpers Class**
+
+* *Static* bundleID -> *String*
+* *Static* iOS10 -> *Bool*
+* *Static* iOS9 -> *Bool*
+* *Static* iOS8 -> *Bool*
+* *Static* iOS7 -> *Bool*
+* *Static* deviceUUID -> *String*
+* *Static* applicationName -> *String*
+* *Static* applicationVersion** -> *String*
+* *Static* deviceName -> *String*
+* *Static* devicModel -> *String*
+* *Static* deviceVersion -> *String*
+* *Static* getErrorMessageFromCode(errorCode : Int) -> *(String?, String?, String?)*
+* *Static* getMediaCacheDirectory -> *String?*
+* *Static* getResolution() -> *(CGFloat, CGFloat)*
+* *Static* generateRandomAlphanumeric(characterCount: Int) -> *String*
+* *Static* randomInt(min: Int, max:Int) -> *Int*
+* *Static* mathDegrees(radians : Double) -> *Double*
+* *Static* mathRadians(degrees : Double) -> *Double*
+* *Static* convertMilesToKilemoters(miles : Double) -> *Double*
+* *Static* getSettingValue(settingKey: String) -> *String *
+
+
+#####**String Extension**
+
+* IO_isEmail() -> *Bool*
+* IO_md5() -> *String*
+* IO_condenseWhitespace() -> *String*
+
+
+#####**UIViewController Extension**
+
+* IO_presentViewControllerWithCustomAnimation(viewControllerToPresent: UIViewController!)
+* IO_dismissViewControllerWithCustomAnimation()
+
+
+#####**IO_Json Class**
+
+* *Static* JSONStringify(value: AnyObject, prettyPrinted: Bool = false) -> *String*
+* *Static* JSONParseArray(jsonString: String) -> *[AnyObject]*
+* *Static* JSONParseDictionary(jsonString: String) -> *[String: AnyObject]*
+
+
+#####**IO_Encryption Class**
+
+* plainText -> *String!*
+* encryptedText -> *String!*
+* init(plainText: String!)
+* init(encryptedText: String!)
+
+
+#####**IO_DateTime Class**
+
+* init(initWithNsDate date : NSDate!)
+* init(initWithString date: String!)
+* getDate() -> *NSDate!*
+* getDateString() -> *String!*
+* *Static* getCurrentGMTDate() -> *NSDate*
+* getTimeAgoString() -> *String!*
+* getUnixTimeStamp() -> *Int*
+
+
+#####**IO_StreamReader File Reader Class**
+
+* init? (pathUrl: NSURL!, chunkSize: UInt64 = 4096)
+* getChunkData() -> *NSData?*
+* rewind() -> *Void*
+* close()
+
+
+#####**IO_MediaCachingResponseHandler Type**
+
+* (success : Bool, image : UIImage!) -> *Void*
+
+#####**IO_MediaCaching Class**
+
+* init(getMediaImage fileUrl : String!, completionHandler : IO_MediaCachingResponseHandler)
+* *Static* convertUrlToFileName(fileUrl: String) -> *String*
+* *Static* mediaExists(fileName : String) -> *Bool*
+* *Static* getMediaImageForBase64Encoded(fileName : String) -> *String!*
+* *Static* saveFileToCache(fileName: String!, fileContent: NSData!)
+* *Static* removeFileFromCache(fileName: String!)
+* *Static* clearCache(timeInterval: NSTimeInterval = -604800)
+
+
+#####**IO_ServerSyncResponseHandler Type**
+
+* (success : Bool, code : Int, data : String!, serverObject: AnyObject!) -> *Void*
+
+#####**IO_HttpHeader Type**
+
+* init(headerName: String, headerValue: String)
+
+#####**IO_Reachability Class**
+
+* *Static* isConnectedToNetwork() -> *Bool*
+
+#####**IO_ServerSync Class**
+
+* *Enum* RequestMethods -> *String*
+* init(jsonRequest requestUrl : String, parameters : Dictionary<String, AnyObject>, method: RequestMethods, completitionHandler : IO_ServerSyncResponseHandler)
+* init(jsonRequestWithHeaders requestUrl : String, parameters : Dictionary<String, AnyObject>, method: RequestMethods, headers: [IO_HttpHeader], completitionHandler : IO_ServerSyncResponseHandler)
+* init (multipartFormDataRequest requestUrl : String, parameters : Dictionary<String, AnyObject>, completitionHandler : IO_ServerSyncResponseHandler)
+* init (multipartFormDataRequestWithHeaders requestUrl : String, parameters : Dictionary<String, AnyObject>, headers: [IO_HttpHeader], completitionHandler : IO_ServerSyncResponseHandler)
+* init(standartRequest requestUrl: String, requestBody: String!, method: RequestMethods, headers: [IO_HttpHeader]!, completitionHandler : IO_ServerSyncResponseHandler)
+
+
+#####**IO_TimerResponseHandler Type**
+
+* **()** -> *Void*
+
+#####**IO_Timer Class**
+
+* init(withTimeInterval timerInterval: NSTimeInterval, completitionHandler: IO_TimerResponseHandler!)
+* StopTimer()
+* Update()
+
+
+
+
+
+

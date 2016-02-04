@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DEE928311C629EB000326DAC"
-               BuildableName = "ioshelpers.framework"
-               BlueprintName = "ioshelpers"
+               BuildableName = "IO_IOS_Helpers.framework"
+               BlueprintName = "IO_IOS_Helpers"
                ReferencedContainer = "container:ioshelpers.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -37,14 +37,22 @@
                BlueprintName = "ioshelpersTests"
                ReferencedContainer = "container:ioshelpers.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ioshelpersTests/testMediaCaching()">
+               </Test>
+               <Test
+                  Identifier = "ioshelpersTests/testPerformanceExample()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DEE928311C629EB000326DAC"
-            BuildableName = "ioshelpers.framework"
-            BlueprintName = "ioshelpers"
+            BuildableName = "IO_IOS_Helpers.framework"
+            BlueprintName = "IO_IOS_Helpers"
             ReferencedContainer = "container:ioshelpers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,7 +60,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -65,8 +73,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DEE928311C629EB000326DAC"
-            BuildableName = "ioshelpers.framework"
-            BlueprintName = "ioshelpers"
+            BuildableName = "IO_IOS_Helpers.framework"
+            BlueprintName = "IO_IOS_Helpers"
             ReferencedContainer = "container:ioshelpers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,21 +87,23 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DEE928311C629EB000326DAC"
-            BuildableName = "ioshelpers.framework"
-            BlueprintName = "ioshelpers"
-            ReferencedContainer = "container:ioshelpers.xcodeproj">
+            BlueprintIdentifier = "DEE928881C62BC3300326DAC"
+            BuildableName = "frameworktest.app"
+            BlueprintName = "frameworktest"
+            ReferencedContainer = "container:../frameworktest/frameworktest.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "IO_IOS_Helpers.framework"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

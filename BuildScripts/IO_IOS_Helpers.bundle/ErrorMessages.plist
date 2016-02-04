@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>9001</key>
+	<dict>
+		<key>title</key>
+		<string>Shame on us!</string>
+		<key>message</key>
+		<string>Our server is having trouble at the moment. Please try again.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9002</key>
+	<dict>
+		<key>title</key>
+		<string>Ooops!</string>
+		<key>message</key>
+		<string>Please enter a valid user name and password.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9003</key>
+	<dict>
+		<key>title</key>
+		<string>Ooops!</string>
+		<key>message</key>
+		<string>Passwords does not match!</string>
+		<key>cancelButtonTitle</key>
+		<string>OK, I understand.</string>
+	</dict>
+	<key>9004</key>
+	<dict>
+		<key>title</key>
+		<string>Registration Success</string>
+		<key>message</key>
+		<string>Please check your e-mail and confirm registration.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9005</key>
+	<dict>
+		<key>title</key>
+		<string>Ooops!</string>
+		<key>message</key>
+		<string>Please enter a valid e-mail address.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9006</key>
+	<dict>
+		<key>title</key>
+		<string>Info!</string>
+		<key>message</key>
+		<string>Please check your e-mail and follow directions registration.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9007</key>
+	<dict>
+		<key>title</key>
+		<string>Info!</string>
+		<key>message</key>
+		<string>Your profile has been updated!</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9008</key>
+	<dict>
+		<key>title</key>
+		<string>Info!</string>
+		<key>message</key>
+		<string>Thank you for contact us.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9009</key>
+	<dict>
+		<key>title</key>
+		<string>Ooops!</string>
+		<key>message</key>
+		<string>Please check your internet connection.</string>
+		<key>cancelButtonTitle</key>
+		<string>OK</string>
+	</dict>
+	<key>9010</key>
+	<dict>
+		<key>title</key>
+		<string></string>
+		<key>message</key>
+		<string>Do you want to edit this video ?</string>
+		<key>cancelButtonTitle</key>
+		<string>Yes</string>
+	</dict>
+</dict>
+</plist>

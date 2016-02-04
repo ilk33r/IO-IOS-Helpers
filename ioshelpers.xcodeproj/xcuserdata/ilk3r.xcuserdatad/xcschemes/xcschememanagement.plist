@@ -7,7 +7,7 @@
 		<key>ioshelpers.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -18,6 +18,26 @@
 			<true/>
 		</dict>
 		<key>DEE9283B1C629EB000326DAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DEE92DBB1C62BFBF00326DAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DEE92DC41C62BFC000326DAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DEE92DE51C62C33200326DAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DEE92DED1C62C8BA00326DAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DEE928361C629EB000326DAC /* ioshelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = DEE928351C629EB000326DAC /* ioshelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DEE9283D1C629EB000326DAC /* ioshelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE928321C629EB000326DAC /* ioshelpers.framework */; };
-		DEE928421C629EB000326DAC /* ioshelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928411C629EB000326DAC /* ioshelpersTests.swift */; };
+		DE4FF7131C638148004CD87A /* IO_IOS_Helpers.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE4FF7111C637F23004CD87A /* IO_IOS_Helpers.bundle */; };
+		DE4FF7151C638A10004CD87A /* IO_ServerSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */; };
+		DE4FF7171C638A37004CD87A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */; };
+		DE4FF7191C639C7F004CD87A /* IO_Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF7181C639C7F004CD87A /* IO_Timer.swift */; };
+		DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */; };
+		DEE9283D1C629EB000326DAC /* IO_IOS_Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */; };
+		DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */; };
+		DEE928511C62A17600326DAC /* IO_Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928501C62A17600326DAC /* IO_Encryption.swift */; };
+		DEE928531C62A21D00326DAC /* IO_Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928521C62A21D00326DAC /* IO_Common.swift */; };
+		DEE928551C62A2A900326DAC /* IO_Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928541C62A2A900326DAC /* IO_Json.swift */; };
+		DEE928571C62A2E900326DAC /* IO_StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928561C62A2E900326DAC /* IO_StreamReader.swift */; };
+		DEE9285D1C62A5FA00326DAC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE9285C1C62A5FA00326DAC /* Security.framework */; };
+		DEE92DD61C62C00A00326DAC /* ioshelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = DEE92DD41C62C00A00326DAC /* ioshelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DEE92DD81C62C02600326DAC /* ioshelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE92DD71C62C02600326DAC /* ioshelpersTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +34,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DEE928321C629EB000326DAC /* ioshelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ioshelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEE928351C629EB000326DAC /* ioshelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ioshelpers.h; sourceTree = "<group>"; };
-		DEE928371C629EB000326DAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE4FF70C1C636A2C004CD87A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DE4FF7111C637F23004CD87A /* IO_IOS_Helpers.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IO_IOS_Helpers.bundle; path = BuildScripts/IO_IOS_Helpers.bundle; sourceTree = "<group>"; };
+		DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_ServerSync.swift; sourceTree = "<group>"; };
+		DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DE4FF7181C639C7F004CD87A /* IO_Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_Timer.swift; sourceTree = "<group>"; };
+		DE8EF12A1C633CDB00739B0E /* Build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = Build.sh; path = BuildScripts/Build.sh; sourceTree = "<group>"; };
+		DE8EF12D1C633D3400739B0E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = BuildScripts/Settings.bundle; sourceTree = "<group>"; };
+		DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_MediaCaching.swift; sourceTree = "<group>"; };
+		DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IO_IOS_Helpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE9283C1C629EB000326DAC /* ioshelpersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ioshelpersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DEE928411C629EB000326DAC /* ioshelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ioshelpersTests.swift; sourceTree = "<group>"; };
-		DEE928431C629EB000326DAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_DateTime.swift; sourceTree = "<group>"; };
+		DEE928501C62A17600326DAC /* IO_Encryption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_Encryption.swift; sourceTree = "<group>"; };
+		DEE928521C62A21D00326DAC /* IO_Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_Common.swift; sourceTree = "<group>"; };
+		DEE928541C62A2A900326DAC /* IO_Json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_Json.swift; sourceTree = "<group>"; };
+		DEE928561C62A2E900326DAC /* IO_StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_StreamReader.swift; sourceTree = "<group>"; };
+		DEE9285C1C62A5FA00326DAC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DEE9285E1C62A6BA00326DAC /* IO_IOS_Helpers-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IO_IOS_Helpers-Bridging.h"; sourceTree = "<group>"; };
+		DEE92DD41C62C00A00326DAC /* ioshelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioshelpers.h; sourceTree = "<group>"; };
+		DEE92DD71C62C02600326DAC /* ioshelpersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ioshelpersTests.swift; sourceTree = "<group>"; };
+		DEE92DD91C62C02E00326DAC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEE92DDB1C62C07100326DAC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE4FF7171C638A37004CD87A /* SystemConfiguration.framework in Frameworks */,
+				DEE9285D1C62A5FA00326DAC /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,26 +71,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE9283D1C629EB000326DAC /* ioshelpers.framework in Frameworks */,
+				DEE9283D1C629EB000326DAC /* IO_IOS_Helpers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE8EF1291C633C9B00739B0E /* BuildScripts */ = {
+			isa = PBXGroup;
+			children = (
+				DE4FF7111C637F23004CD87A /* IO_IOS_Helpers.bundle */,
+				DE8EF12D1C633D3400739B0E /* Settings.bundle */,
+				DE8EF12A1C633CDB00739B0E /* Build.sh */,
+			);
+			name = BuildScripts;
+			sourceTree = "<group>";
+		};
 		DEE928281C629EB000326DAC = {
 			isa = PBXGroup;
 			children = (
+				DE8EF1291C633C9B00739B0E /* BuildScripts */,
 				DEE928341C629EB000326DAC /* ioshelpers */,
 				DEE928401C629EB000326DAC /* ioshelpersTests */,
 				DEE928331C629EB000326DAC /* Products */,
+				DE4FF70C1C636A2C004CD87A /* README.md */,
+				DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */,
+				DEE9285C1C62A5FA00326DAC /* Security.framework */,
 			);
 			sourceTree = "<group>";
 		};
 		DEE928331C629EB000326DAC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DEE928321C629EB000326DAC /* ioshelpers.framework */,
+				DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */,
 				DEE9283C1C629EB000326DAC /* ioshelpersTests.xctest */,
 			);
 			name = Products;
@@ -71,8 +113,17 @@
 		DEE928341C629EB000326DAC /* ioshelpers */ = {
 			isa = PBXGroup;
 			children = (
-				DEE928351C629EB000326DAC /* ioshelpers.h */,
-				DEE928371C629EB000326DAC /* Info.plist */,
+				DE4FF7181C639C7F004CD87A /* IO_Timer.swift */,
+				DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */,
+				DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */,
+				DEE928561C62A2E900326DAC /* IO_StreamReader.swift */,
+				DEE928541C62A2A900326DAC /* IO_Json.swift */,
+				DEE928521C62A21D00326DAC /* IO_Common.swift */,
+				DEE928501C62A17600326DAC /* IO_Encryption.swift */,
+				DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */,
+				DEE9285E1C62A6BA00326DAC /* IO_IOS_Helpers-Bridging.h */,
+				DEE92DD41C62C00A00326DAC /* ioshelpers.h */,
+				DEE92DD91C62C02E00326DAC /* Info.plist */,
 			);
 			path = ioshelpers;
 			sourceTree = "<group>";
@@ -80,8 +131,8 @@
 		DEE928401C629EB000326DAC /* ioshelpersTests */ = {
 			isa = PBXGroup;
 			children = (
-				DEE928411C629EB000326DAC /* ioshelpersTests.swift */,
-				DEE928431C629EB000326DAC /* Info.plist */,
+				DEE92DDB1C62C07100326DAC /* Info.plist */,
+				DEE92DD71C62C02600326DAC /* ioshelpersTests.swift */,
 			);
 			path = ioshelpersTests;
 			sourceTree = "<group>";
@@ -93,29 +144,30 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE928361C629EB000326DAC /* ioshelpers.h in Headers */,
+				DEE92DD61C62C00A00326DAC /* ioshelpers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		DEE928311C629EB000326DAC /* ioshelpers */ = {
+		DEE928311C629EB000326DAC /* IO_IOS_Helpers */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DEE928461C629EB000326DAC /* Build configuration list for PBXNativeTarget "ioshelpers" */;
+			buildConfigurationList = DEE928461C629EB000326DAC /* Build configuration list for PBXNativeTarget "IO_IOS_Helpers" */;
 			buildPhases = (
 				DEE9282D1C629EB000326DAC /* Sources */,
 				DEE9282E1C629EB000326DAC /* Frameworks */,
 				DEE9282F1C629EB000326DAC /* Headers */,
 				DEE928301C629EB000326DAC /* Resources */,
+				DEE92DEC1C62C83C00326DAC /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ioshelpers;
+			name = IO_IOS_Helpers;
 			productName = ioshelpers;
-			productReference = DEE928321C629EB000326DAC /* ioshelpers.framework */;
+			productReference = DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DEE9283B1C629EB000326DAC /* ioshelpersTests */ = {
@@ -166,7 +218,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DEE928311C629EB000326DAC /* ioshelpers */,
+				DEE928311C629EB000326DAC /* IO_IOS_Helpers */,
 				DEE9283B1C629EB000326DAC /* ioshelpersTests */,
 			);
 		};
@@ -184,16 +236,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE4FF7131C638148004CD87A /* IO_IOS_Helpers.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DEE92DEC1C62C83C00326DAC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n\n# Constants\nSF_TARGET_NAME=${PROJECT_NAME}\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/${CONFIGURATION}-universal\n\n# Take build target\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\necho \"Please choose iPhone simulator as the build target.\"\nexit 1\nfi\n\nIPHONE_DEVICE_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n# Build the other (non-simulator) platform\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/arm64\" SYMROOT=\"${SYMROOT}\" ARCHS='arm64' VALID_ARCHS='arm64' $ACTION\n\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\"  CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/armv7\" SYMROOT=\"${SYMROOT}\" ARCHS='armv7 armv7s' VALID_ARCHS='armv7 armv7s' $ACTION\n\n# Copy the framework structure to the universal folder (clean it first)\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework\"\n\n# Smash them together to combine all architectures\nlipo -create  \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/arm64/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/armv7/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" -output \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DEE9282D1C629EB000326DAC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEE928511C62A17600326DAC /* IO_Encryption.swift in Sources */,
+				DE4FF7191C639C7F004CD87A /* IO_Timer.swift in Sources */,
+				DEE928571C62A2E900326DAC /* IO_StreamReader.swift in Sources */,
+				DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */,
+				DEE928551C62A2A900326DAC /* IO_Json.swift in Sources */,
+				DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */,
+				DE4FF7151C638A10004CD87A /* IO_ServerSync.swift in Sources */,
+				DEE928531C62A21D00326DAC /* IO_Common.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE928421C629EB000326DAC /* ioshelpersTests.swift in Sources */,
+				DEE92DD81C62C02600326DAC /* ioshelpersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +287,7 @@
 /* Begin PBXTargetDependency section */
 		DEE9283F1C629EB000326DAC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DEE928311C629EB000326DAC /* ioshelpers */;
+			target = DEE928311C629EB000326DAC /* IO_IOS_Helpers */;
 			targetProxy = DEE9283E1C629EB000326DAC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -308,48 +385,70 @@
 		DEE928471C629EB000326DAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ioshelpers/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpers;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				OTHER_SWIFT_FLAGS = "-D NETWORK_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioioshelpers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ioshelpers/IO_IOS_Helpers-Bridging.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		DEE928481C629EB000326DAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ioshelpers/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpers;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				OTHER_SWIFT_FLAGS = "-D NETWORK_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioioshelpers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ioshelpers/IO_IOS_Helpers-Bridging.h";
 			};
 			name = Release;
 		};
 		DEE9284A1C629EB000326DAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ioshelpersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		DEE9284B1C629EB000326DAC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ioshelpersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpersTests;
@@ -369,13 +468,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DEE928461C629EB000326DAC /* Build configuration list for PBXNativeTarget "ioshelpers" */ = {
+		DEE928461C629EB000326DAC /* Build configuration list for PBXNativeTarget "IO_IOS_Helpers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEE928471C629EB000326DAC /* Debug */,
 				DEE928481C629EB000326DAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEE928491C629EB000326DAC /* Build configuration list for PBXNativeTarget "ioshelpersTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +484,7 @@
 				DEE9284B1C629EB000326DAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
