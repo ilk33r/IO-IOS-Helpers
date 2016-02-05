@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Foundation
 
 public protocol IO_LeftMenuViewButtonsDelegate {
 
@@ -22,19 +23,23 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 	/// Table view
 	@IBOutlet public weak var menuTableView: UITableView!
 	
-	internal var rowCount: NSNumber!
-	internal var rowHeight: NSNumber!
-	internal var gestureSensitive: NSNumber!
 	internal var leftMenuOpenPosX: CGFloat!
-	internal var rightDirection: Bool!
-	internal var openPosX: CGFloat!
 	
 	/// Delegate
 	public var delegate: IO_LeftMenuViewButtonsDelegate!
+	public var gestureSensitive: CGFloat!
+	public var rowCount: Int!
+	public var rowHeight: CGFloat!
+	public var menuDirectionIsRight: Bool!
+	
 	
 	private var swipeStartCoords: CGPoint = CGPointMake(0, 0)
 	private var menuIsClosing = false
 	private var currentNib: [AnyObject]!
+	
+	required public init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
 	
 	/// Drawing code
 	override public func drawRect(rect: CGRect) {
@@ -89,18 +94,18 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 	
 	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		return self.rowCount.integerValue
+		return self.rowCount
 	}
 
 	public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
-		return CGFloat(self.rowHeight.floatValue)
+		return self.rowHeight
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let cellId = "leftMenuBtn-\(indexPath.row + 1)"
-		let currentButtonAction: Selector = "btnLeftMenuTapped"
+		let currentButtonAction: Selector = "btnLeftMenuTapped:"
 		
 		var tableViewCell: UITableViewCell!	= tableView.dequeueReusableCellWithIdentifier(cellId)
 		
@@ -133,7 +138,7 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 		return tableViewCell
 	}
 	
-	internal func btnLeftMenuTapped(sender: UIButton!) {
+	public func btnLeftMenuTapped(sender: UIButton!) {
 		
 		if(delegate != nil) {
 			
@@ -154,14 +159,13 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 			swipeStartCoords		= coords
 		}else if(sender.state == UIGestureRecognizerState.Changed) {
 			
-			let destinationX		= coords.x - swipeStartCoords.x
-			let _sensitive			= CGFloat(self.gestureSensitive.floatValue)
+			let destinationX = coords.x - swipeStartCoords.x
+			let _sensitive = self.gestureSensitive
 			
-			if(rightDirection!) {
-				
-				if((destinationX > 10.0) && ( destinationX > (1.0 * _sensitive) )) {
+			if(menuDirectionIsRight!) {
+				if((destinationX > 10.0) && ( destinationX < (1.0 * _sensitive) )) {
 					
-					if(destinationX + leftMenuOpenPosX < self.frame.origin.x) {
+					if(destinationX + leftMenuOpenPosX > self.frame.origin.x) {
 						
 						if(delegate != nil) {
 							
@@ -213,12 +217,7 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 			if(menuIsClosing) {
 				return
 			}else{
-				let leftMenuOpenFrame = CGRectMake(leftMenuOpenPosX, 0, self.frame.size.width, self.frame.size.height)
-				
-				UIView.animateWithDuration(NSTimeInterval(0.6), animations: { () -> Void in
-					
-					self.frame = leftMenuOpenFrame
-				})
+				self.delegate.IO_LeftMenu(setMenuPosition: 0)
 			}
 		}
 	}

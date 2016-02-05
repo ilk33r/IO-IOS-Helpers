@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// Left menu UITableViewCell
 public class IO_LeftMenuTableViewCell: UITableViewCell {

@@ -52,22 +52,12 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="gestureSensitive">
-                    <integer key="value" value="30"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                 <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
                     <size key="value" width="5" height="0.0"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
                     <real key="value" value="0.29999999999999999"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="rightDirection" value="YES"/>
-                <userDefinedRuntimeAttribute type="number" keyPath="rowCount">
-                    <integer key="value" value="3"/>
-                </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="number" keyPath="rowHeight">
-                    <integer key="value" value="54"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="253" y="310"/>
@@ -79,7 +69,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32b-eF-8F6" userLabel="btnHome">
+                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="btnUpload" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32b-eF-8F6" userLabel="btnHome">
                         <rect key="frame" x="8" y="0.0" width="176" height="43"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="22"/>
@@ -108,7 +98,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTa-l6-5GG" userLabel="btnHome">
+                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="btnUpload" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTa-l6-5GG" userLabel="btnHome">
                         <rect key="frame" x="8" y="0.0" width="176" height="43"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="22"/>
@@ -137,7 +127,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibe-kr-fXp" userLabel="btnHome">
+                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="Settings" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibe-kr-fXp" userLabel="btnHome">
                         <rect key="frame" x="8" y="0.0" width="176" height="43"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="22"/>

@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Foundation
 
 private struct AnimationViewObject {
     
@@ -35,7 +36,7 @@ public class IO_NavigationControllerWithMenu: UINavigationController, IO_LeftMen
 	private var leftMenuRightDirection: Bool!
 	
 	/// Load menu view
-	public func loadLeftMenu() {
+	public func loadLeftMenu(rowCount: Int, rowHeight: CGFloat = 54, directionIsRight: Bool = false, gestureSensitive: CGFloat = 30) {
 		
 		if(isMenuViewLoaded) {
 			return
@@ -57,27 +58,33 @@ public class IO_NavigationControllerWithMenu: UINavigationController, IO_LeftMen
 			}
             
             if leftMenuView != nil {
-                
+				
+				leftMenuView.delegate = self
+				leftMenuView.menuDirectionIsRight = directionIsRight
+				leftMenuView.gestureSensitive = gestureSensitive
+				leftMenuView.rowCount = rowCount
+				leftMenuView.rowHeight = rowHeight
+				
 				self.view.addSubview(leftMenuView)
                 leftMenuSize = CGSizeMake((self.view.frame.width * CGFloat(2.0 / 3.0)), UIScreen.mainScreen().bounds.height)
 				
-				if(leftMenuView.rightDirection!) {
+				if(directionIsRight) {
 
 					leftMenuClosePositionX = UIScreen.mainScreen().bounds.width
 					leftMenuOpenPosX = leftMenuClosePositionX - leftMenuSize.width
+					leftMenuView.leftMenuOpenPosX = leftMenuOpenPosX
 					leftMenuView.frame = CGRectMake(leftMenuClosePositionX, 0, leftMenuSize.width, leftMenuSize.height)
 				}else{
 					leftMenuClosePositionX = (-1.0 * leftMenuSize.width)
 					leftMenuOpenPosX = 0
+					leftMenuView.leftMenuOpenPosX = leftMenuOpenPosX
 					leftMenuView.frame = CGRectMake(leftMenuClosePositionX, 0, leftMenuSize.width, leftMenuSize.height)
 				}
 				
-				
-                leftMenuView.delegate = self
                 leftMenuView.layoutIfNeeded()
                 leftMenuView.hidden = true
 				
-				self.leftMenuRightDirection = leftMenuView.rightDirection
+				self.leftMenuRightDirection = directionIsRight
             }
         }
         
@@ -126,7 +133,8 @@ public class IO_NavigationControllerWithMenu: UINavigationController, IO_LeftMen
 				
 				let openedFrameRect: CGRect
 				if(leftMenuRightDirection!) {
-					openedFrameRect = CGRectMake((-1 * (leftMenuClosePositionX - leftMenuSize.width)), animationView.frame.origin.y, animationView.frame.width, animationView.frame.height)
+					let frameXPos = CGFloat(-1 * leftMenuSize.width);
+					openedFrameRect = CGRectMake(frameXPos, animationView.frame.origin.y, animationView.frame.width, animationView.frame.height)
 				}else{
 					openedFrameRect = CGRectMake(leftMenuSize.width, animationView.frame.origin.y, animationView.frame.width, animationView.frame.height)
 				}
@@ -196,7 +204,8 @@ public class IO_NavigationControllerWithMenu: UINavigationController, IO_LeftMen
             animationViewDict.view.frame = CGRectMake(animationViewDict.openedFrame.origin.x + currentFrameXDiff, animationViewDict.openedFrame.origin.y, animationViewDict.openedFrame.width, animationViewDict.openedFrame.height)
         }
 
-        self.leftMenuView.frame = CGRectMake(currentFrameXDiff, self.leftMenuView.frame.origin.y, self.leftMenuView.frame.width, self.leftMenuView.frame.height)
+		let currentPosX = leftMenuOpenPosX + currentFrameXDiff
+        self.leftMenuView.frame = CGRectMake(currentPosX, self.leftMenuView.frame.origin.y, self.leftMenuView.frame.width, self.leftMenuView.frame.height)
     }
 	
     private func getCurrentViews() -> [UIView] {
@@ -205,7 +214,7 @@ public class IO_NavigationControllerWithMenu: UINavigationController, IO_LeftMen
         
         for currentView in self.view.subviews {
             
-            if let restId = (currentView ).restorationIdentifier {
+            if let restId = (currentView).restorationIdentifier {
                 
                 if restId == "LeftMenuView" {
                     continue;

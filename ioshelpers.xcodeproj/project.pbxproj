@@ -23,6 +23,11 @@
 		DE4FF75F1C63B89B004CD87A /* IO_LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF75B1C63B893004CD87A /* IO_LeftMenuView.swift */; };
 		DE4FF7611C63B8E6004CD87A /* IO_LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4FF7601C63B8E6004CD87A /* IO_LeftMenuView.xib */; };
 		DE4FF7631C63BCD9004CD87A /* IO_NavigationControllerWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF7621C63BCD9004CD87A /* IO_NavigationControllerWithMenu.swift */; };
+		DE529B8E1C64B5F2002F7A84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8D1C64B5F2002F7A84 /* UIKit.framework */; };
+		DE529B901C64B60D002F7A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8F1C64B60D002F7A84 /* Foundation.framework */; };
+		DE529BC91C64C549002F7A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8F1C64B60D002F7A84 /* Foundation.framework */; };
+		DE529BCB1C64C59B002F7A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8F1C64B60D002F7A84 /* Foundation.framework */; };
+		DE529BCC1C64C5A0002F7A84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8D1C64B5F2002F7A84 /* UIKit.framework */; };
 		DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */; };
 		DEE9283D1C629EB000326DAC /* IO_IOS_Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */; };
 		DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */; };
@@ -83,6 +88,8 @@
 		DE4FF75B1C63B893004CD87A /* IO_LeftMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_LeftMenuView.swift; sourceTree = "<group>"; };
 		DE4FF7601C63B8E6004CD87A /* IO_LeftMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IO_LeftMenuView.xib; path = BuildScripts/IO_LeftMenuView.xib; sourceTree = "<group>"; };
 		DE4FF7621C63BCD9004CD87A /* IO_NavigationControllerWithMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_NavigationControllerWithMenu.swift; sourceTree = "<group>"; };
+		DE529B8D1C64B5F2002F7A84 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DE529B8F1C64B60D002F7A84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DE8EF12A1C633CDB00739B0E /* Build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = Build.sh; path = BuildScripts/Build.sh; sourceTree = "<group>"; };
 		DE8EF12D1C633D3400739B0E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = BuildScripts/Settings.bundle; sourceTree = "<group>"; };
 		DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_MediaCaching.swift; sourceTree = "<group>"; };
@@ -106,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE529BC91C64C549002F7A84 /* Foundation.framework in Frameworks */,
 				DE4FF7381C63AA43004CD87A /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE529B901C64B60D002F7A84 /* Foundation.framework in Frameworks */,
+				DE529B8E1C64B5F2002F7A84 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +147,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE529BCC1C64C5A0002F7A84 /* UIKit.framework in Frameworks */,
+				DE529BCB1C64C59B002F7A84 /* Foundation.framework in Frameworks */,
 				DE4FF7171C638A37004CD87A /* SystemConfiguration.framework in Frameworks */,
 				DEE9285D1C62A5FA00326DAC /* Security.framework in Frameworks */,
 			);
@@ -193,6 +205,18 @@
 			path = ioleftmenuTests;
 			sourceTree = "<group>";
 		};
+		DE529BCA1C64C57B002F7A84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE529B8F1C64B60D002F7A84 /* Foundation.framework */,
+				DE529B8D1C64B5F2002F7A84 /* UIKit.framework */,
+				DE4FF7371C63AA43004CD87A /* CoreData.framework */,
+				DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */,
+				DEE9285C1C62A5FA00326DAC /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DE8EF1291C633C9B00739B0E /* BuildScripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,10 +239,8 @@
 				DE4FF7421C63B688004CD87A /* ioleftmenu */,
 				DE4FF74E1C63B688004CD87A /* ioleftmenuTests */,
 				DEE928331C629EB000326DAC /* Products */,
+				DE529BCA1C64C57B002F7A84 /* Frameworks */,
 				DE4FF70C1C636A2C004CD87A /* README.md */,
-				DE4FF7371C63AA43004CD87A /* CoreData.framework */,
-				DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */,
-				DEE9285C1C62A5FA00326DAC /* Security.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -647,6 +669,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = iocoredatahelper/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -654,6 +677,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.iocoredatahelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};
@@ -680,12 +704,14 @@
 		DE4FF7531C63B688004CD87A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ioleftmenu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioleftmenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,16 +722,20 @@
 		DE4FF7541C63B688004CD87A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = ioleftmenu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioleftmenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};
@@ -853,6 +883,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = ioshelpers/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -866,6 +897,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ioshelpers/IO_IOS_Helpers-Bridging.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
 		};
@@ -902,6 +934,7 @@
 				DE4FF7321C63A655004CD87A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE4FF7331C63A655004CD87A /* Build configuration list for PBXNativeTarget "iocoredatahelperTests" */ = {
 			isa = XCConfigurationList;
@@ -910,6 +943,7 @@
 				DE4FF7351C63A655004CD87A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE4FF7521C63B688004CD87A /* Build configuration list for PBXNativeTarget "IO_Left_Menu" */ = {
 			isa = XCConfigurationList;
@@ -918,6 +952,7 @@
 				DE4FF7541C63B688004CD87A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE4FF7551C63B688004CD87A /* Build configuration list for PBXNativeTarget "ioleftmenuTests" */ = {
 			isa = XCConfigurationList;
@@ -926,6 +961,7 @@
 				DE4FF7571C63B688004CD87A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DEE9282C1C629EB000326DAC /* Build configuration list for PBXProject "ioshelpers" */ = {
 			isa = XCConfigurationList;

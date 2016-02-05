@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 ilkerozcan. All rights reserved.
 //
 
-import UIKit
 import CoreData
+import Foundation
 
 /// Core data helper class
 public class IO_DataManagement {

@@ -135,35 +135,27 @@
 
 ##iOS Menu Framework
 
-#####**IO_NavigationControllerWithMenu Class**
+#####**IO_NavigationControllerWithMenu (UINavigationController) Class**
 
 * leftMenuOpenPosX: *CGFloat!*
 * isMenuViewLoaded: *Bool*
 * leftMenuOpenStatus: *Bool*
-* loadLeftMenu(currentView: UIView!)
+* loadLeftMenu(rowCount: Int, rowHeight: CGFloat = 54, directionIsRight: Bool = false, gestureSensitive: CGFloat = 30)
 * IO_LeftMenuToggle()
 * closeLeftMenuImmediately()
 * IO_LeftMenu(setMenuPosition currentFrameXDiff: CGFloat)
 * *Required* IO_LeftMenu(clickeMenudButton sender: UIButton!)
 
 
-#####**IO_LeftMenuView Class**
+#####**IO_LeftMenuView (UIView) Class**
 
 * *@IBOutlet* menuTableView: UITableView!
 
-**View Properties**
-* rowCount: NSNumber!
-* rowHeight: NSNumber!
-* gestureSensitive: NSNumber!
-* leftMenuOpenPosX: CGFloat!
-* rightDirection: Bool!
-* openPosX: CGFloat!
-
-**View Nib Name:** IO_LeftMenuView
-**Cell buttons nib name:*** leftMenuBtn-1, leftMenuBtn-2, leftMenuBtn-3
+- **View Nib Name:** IO_LeftMenuView
+- **Cell buttons nib name:*** leftMenuBtn-1, leftMenuBtn-2, leftMenuBtn-3
 
 
-#####**IO_LeftMenuTableViewCell Class**
+#####**IO_LeftMenuTableViewCell (UITableViewCell) Class**
 
 * *@IBOutlet* cellButton: UIButton!
 
