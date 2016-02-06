@@ -81,7 +81,7 @@ class ioshelpersTests: XCTestCase {
         var elapsedTimeVal = 0
 		print("Testing timer ...\n\n")
 		
-        let timer = IO_Timer(withTimeInterval: NSTimeInterval(3)) { (timeElapsed) -> Void in
+        let timer = IO_Timer(withTimeInterval: NSTimeInterval(0.03)) { (timeElapsed) -> Void in
 			
 			timerExecuteCount += 1
             elapsedTimeVal  = timeElapsed
@@ -103,6 +103,60 @@ class ioshelpersTests: XCTestCase {
 		}
 	}
 	
+    
+    func testRandom()
+    {
+        let testCaseCount:Int = 1000
+        var min = 0
+        var max = 0
+        
+        // + +
+        for _ in 0...testCaseCount
+        {
+            min = 0
+            max = 20000
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+        
+        
+        // - +
+        
+        for _ in 0...testCaseCount
+        {
+            min = -1000
+            max = 20000
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+        
+        // - -
+        for _ in 0...testCaseCount
+        {
+            min = -1000
+            max = -500
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+
+        
+    }
+    
+    
+    
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {
