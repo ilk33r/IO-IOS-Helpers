@@ -77,12 +77,17 @@ class ioshelpersTests: XCTestCase {
 		
 		var waitingBlocks = true
 		var timerExecuteCount = 0
+        
+        var elapsedTimeVal = 0
 		print("Testing timer ...\n\n")
 		
-		let timer = IO_Timer(withTimeInterval: NSTimeInterval(3)) { () -> Void in
+        let timer = IO_Timer(withTimeInterval: NSTimeInterval(3)) { (timeElapsed) -> Void in
 			
 			timerExecuteCount += 1
+            elapsedTimeVal  = timeElapsed
+            
 			print("\(timerExecuteCount)- Hallo!\n")
+            print("elapsed Step : \(elapsedTimeVal)")
 		}
 		
 		while(waitingBlocks) {
@@ -92,6 +97,8 @@ class ioshelpersTests: XCTestCase {
 				timer.StopTimer()
 				waitingBlocks = false
 				XCTAssert(true, "IO_Timer PASS")
+                
+                XCTAssertEqual(4, elapsedTimeVal)
 			}
 		}
 	}
