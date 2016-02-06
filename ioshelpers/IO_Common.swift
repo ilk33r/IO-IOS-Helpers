@@ -146,12 +146,33 @@ public class IO_Helpers: NSObject {
 		return min + Int(arc4random_uniform(UInt32(diff)))
 	}
     
-    public static func randomDouble(min:Float , max:Float)->Double {
+    /*
+    public static func randomDouble(var min:Double , var max:Double)->Double {
         
+        if(max < min)
+        {
+            // swap
+            let temp = min
+            min = max
+            max = temp
+        }
+        else if(max == min)
+        {
+            return min
+        }
+
+        let diff:Double = Double(abs(max - min))
+      
+        let
         
-        return 3
-    }
+        var randDouble = min + Double(arc4random())%diff
+        
+        randDouble = drand48()
+        
+        return randDouble
     
+    }
+    */
 	
 	/// Convert radians to degrees for location
 	public static func mathDegrees(radians : Double) -> Double {
