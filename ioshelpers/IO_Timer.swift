@@ -10,7 +10,7 @@
 import Foundation
 import Dispatch
 
-public typealias IO_TimerResponseHandler = (elapsedSteps:Int) -> Void
+public typealias IO_TimerResponseHandler = (elapsedSteps: Int) -> Void
 
 
 /// Timer class
@@ -35,10 +35,7 @@ public class IO_Timer: NSObject {
 		super.init()
 		self.Start()
 	}
-    
-    
-    
-	
+
 	private func Start() {
         
          stepsElapsed = 0
@@ -46,11 +43,6 @@ public class IO_Timer: NSObject {
         
 	}
 	
-    
-  
-    
-    
-    
 	/// Stop timer
 	public func StopTimer() {
 		
@@ -62,9 +54,6 @@ public class IO_Timer: NSObject {
             stepsElapsed = 0
 		}
 	}
-    
-    
-    
 	
 	// call update
 	public func Update() {

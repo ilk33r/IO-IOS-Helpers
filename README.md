@@ -11,7 +11,7 @@
 * *Static* iOS7 -> *Bool*
 * *Static* deviceUUID -> *String*
 * *Static* applicationName -> *String*
-* *Static* applicationVersion** -> *String*
+* *Static* applicationVersion -> *String*
 * *Static* deviceName -> *String*
 * *Static* devicModel -> *String*
 * *Static* deviceVersion -> *String*
@@ -112,13 +112,22 @@
 
 #####**IO_TimerResponseHandler Type**
 
-* **()** -> *Void*
+* (elapsedSteps: Int) -> *Void*
 
 #####**IO_Timer Class**
 
 * init(withTimeInterval timerInterval: NSTimeInterval, completitionHandler: IO_TimerResponseHandler!)
 * StopTimer()
 * Update()
+
+#####**IO_KeyboardListenerDelegate Type**
+
+* IO_KeyboardListener(keyboardDidOpen keyboardHeight: CGFloat)
+* IO_KeyboardListenerKeyboardWillDismiss()
+
+#####**IO_KeyboardListener Class**
+
+* init(withDelegate delegate: IO_KeyboardListenerDelegate!)
 
 
 ##iOS Core Data Helpers Framework
