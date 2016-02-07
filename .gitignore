@@ -2,3 +2,11 @@ Debug-universal
 DerivedData/*
 Release-universal
 IO-IOS-Helpers_v*
+
+*.xcuserstate
+
+*.xcuserstate
+
+*.xcuserstate
+
+*.xcbkptlist

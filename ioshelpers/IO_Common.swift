@@ -127,9 +127,52 @@ public class IO_Helpers: NSObject {
 	}
 	
 	/// Generate random integer
-	public static func randomInt(min: Int, max:Int) -> Int {
-		return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+	public static func randomInt(var min: Int, var max:Int) -> Int {
+        
+        if(max < min)
+        {
+            // swap
+            let temp = min
+            min = max
+            max = temp
+        }
+        else if(max == min)
+        {
+            return min 
+        }
+        
+        let diff = abs(max - min)
+        
+		return min + Int(arc4random_uniform(UInt32(diff)))
 	}
+    
+    /*
+    public static func randomDouble(var min:Double , var max:Double)->Double {
+        
+        if(max < min)
+        {
+            // swap
+            let temp = min
+            min = max
+            max = temp
+        }
+        else if(max == min)
+        {
+            return min
+        }
+
+        let diff:Double = Double(abs(max - min))
+      
+        let
+        
+        var randDouble = min + Double(arc4random())%diff
+        
+        randDouble = drand48()
+        
+        return randDouble
+    
+    }
+    */
 	
 	/// Convert radians to degrees for location
 	public static func mathDegrees(radians : Double) -> Double {

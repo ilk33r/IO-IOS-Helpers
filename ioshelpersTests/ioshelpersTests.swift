@@ -22,6 +22,8 @@ class ioshelpersTests: XCTestCase {
         super.tearDown()
     }
 	
+    
+    // sample commit to test by aybek can kaya sss
 	func testCommonMethods() {
 		// This is an example of a functional test case.
 		// Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -75,12 +77,17 @@ class ioshelpersTests: XCTestCase {
 		
 		var waitingBlocks = true
 		var timerExecuteCount = 0
+        
+        var elapsedTimeVal = 0
 		print("Testing timer ...\n\n")
 		
-		let timer = IO_Timer(withTimeInterval: NSTimeInterval(3)) { () -> Void in
+        let timer = IO_Timer(withTimeInterval: NSTimeInterval(0.03)) { (timeElapsed) -> Void in
 			
 			timerExecuteCount += 1
+            elapsedTimeVal  = timeElapsed
+            
 			print("\(timerExecuteCount)- Hallo!\n")
+            print("elapsed Step : \(elapsedTimeVal)")
 		}
 		
 		while(waitingBlocks) {
@@ -90,10 +97,89 @@ class ioshelpersTests: XCTestCase {
 				timer.StopTimer()
 				waitingBlocks = false
 				XCTAssert(true, "IO_Timer PASS")
+                
+                XCTAssertEqual(4, elapsedTimeVal)
 			}
 		}
 	}
 	
+    
+    func testRandom()
+    {
+        let testCaseCount:Int = 1000
+        var min = 0
+        var max = 0
+        
+        // + +
+        for _ in 0...testCaseCount
+        {
+            min = 0
+            max = 20000
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+        
+        
+        // - +
+        
+        for _ in 0...testCaseCount
+        {
+            min = -1000
+            max = 20000
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+        
+        // - -
+        for _ in 0...testCaseCount
+        {
+            min = -1000
+            max = -500
+            
+            let randomInt = IO_Helpers.randomInt(min, max: max)
+            
+            XCTAssertLessThanOrEqual(randomInt, max)
+            XCTAssertGreaterThanOrEqual(randomInt, min)
+            
+        }
+
+        
+    }
+    
+    
+    func testRandomDouble()
+    {
+        let testCaseCount:Int = 1000
+        var min = Double(0)
+        var max = Double(0)
+        var result = 0.0
+        
+        
+        min = 0
+        max = 10
+        
+        for _ in 0...testCaseCount
+        {
+               result = IO_Helpers.randomDouble(min, max: max)
+               print(result)
+        }
+     
+        print("ended")
+        
+        
+
+    }
+    
+    
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {
