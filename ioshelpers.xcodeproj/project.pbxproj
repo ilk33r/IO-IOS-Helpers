@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE3908F21C67D772005A38D3 /* IO_KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3908F11C67D772005A38D3 /* IO_KeyboardListener.swift */; };
 		DE4FF7131C638148004CD87A /* IO_IOS_Helpers.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE4FF7111C637F23004CD87A /* IO_IOS_Helpers.bundle */; };
 		DE4FF7151C638A10004CD87A /* IO_ServerSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */; };
 		DE4FF7171C638A37004CD87A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4FF7161C638A37004CD87A /* SystemConfiguration.framework */; };
@@ -21,7 +22,6 @@
 		DE4FF7591C63B858004CD87A /* ioleftmenu.h in Headers */ = {isa = PBXBuildFile; fileRef = DE4FF7431C63B688004CD87A /* ioleftmenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE4FF75E1C63B89A004CD87A /* IO_LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF75A1C63B893004CD87A /* IO_LeftMenuTableViewCell.swift */; };
 		DE4FF75F1C63B89B004CD87A /* IO_LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF75B1C63B893004CD87A /* IO_LeftMenuView.swift */; };
-		DE4FF7611C63B8E6004CD87A /* IO_LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4FF7601C63B8E6004CD87A /* IO_LeftMenuView.xib */; };
 		DE4FF7631C63BCD9004CD87A /* IO_NavigationControllerWithMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4FF7621C63BCD9004CD87A /* IO_NavigationControllerWithMenu.swift */; };
 		DE529B8E1C64B5F2002F7A84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8D1C64B5F2002F7A84 /* UIKit.framework */; };
 		DE529B901C64B60D002F7A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8F1C64B60D002F7A84 /* Foundation.framework */; };
@@ -65,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE3908F11C67D772005A38D3 /* IO_KeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_KeyboardListener.swift; sourceTree = "<group>"; };
 		DE4FF70C1C636A2C004CD87A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DE4FF7111C637F23004CD87A /* IO_IOS_Helpers.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IO_IOS_Helpers.bundle; path = BuildScripts/IO_IOS_Helpers.bundle; sourceTree = "<group>"; };
 		DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_ServerSync.swift; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 				DEE928521C62A21D00326DAC /* IO_Common.swift */,
 				DEE928501C62A17600326DAC /* IO_Encryption.swift */,
 				DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */,
+				DE3908F11C67D772005A38D3 /* IO_KeyboardListener.swift */,
 				DEE9285E1C62A6BA00326DAC /* IO_IOS_Helpers-Bridging.h */,
 				DEE92DD41C62C00A00326DAC /* ioshelpers.h */,
 				DEE92DD91C62C02E00326DAC /* Info.plist */,
@@ -510,7 +512,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE4FF7611C63B8E6004CD87A /* IO_LeftMenuView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +609,7 @@
 				DEE928511C62A17600326DAC /* IO_Encryption.swift in Sources */,
 				DE4FF7191C639C7F004CD87A /* IO_Timer.swift in Sources */,
 				DEE928571C62A2E900326DAC /* IO_StreamReader.swift in Sources */,
+				DE3908F21C67D772005A38D3 /* IO_KeyboardListener.swift in Sources */,
 				DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */,
 				DEE928551C62A2A900326DAC /* IO_Json.swift in Sources */,
 				DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */,
