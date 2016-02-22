@@ -1,5 +1,8 @@
 #iOS Helpers Framework
 
+[![Build Status](https://travis-ci.org/ilk33r/IO-IOS-Helpers.svg?branch=master)](https://travis-ci.org/ilk33r/IO-IOS-Helpers)
+
+
 ###Common Functions
 
 #####**IO_Helpers Class**
