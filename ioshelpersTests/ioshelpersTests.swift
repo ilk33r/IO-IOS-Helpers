@@ -155,30 +155,6 @@ class ioshelpersTests: XCTestCase {
     }
     
     
-    func testRandomDouble()
-    {
-        let testCaseCount:Int = 1000
-        var min = Double(0)
-        var max = Double(0)
-        var result = 0.0
-        
-        
-        min = 0
-        max = 10
-        
-        for _ in 0...testCaseCount
-        {
-               result = IO_Helpers.randomDouble(min, max: max)
-               print(result)
-        }
-     
-        print("ended")
-        
-        
-
-    }
-    
-    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

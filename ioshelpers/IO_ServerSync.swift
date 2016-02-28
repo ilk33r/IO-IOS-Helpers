@@ -47,7 +47,7 @@ public class IO_Reachability {
 }
 
 /// Api connection class
-public class IO_ServerSync: NSObject {
+public class IO_ServerSync: NSObject, NSURLConnectionDelegate {
 	
 	public enum RequestMethods: String {
 		case POST = "POST"
@@ -165,7 +165,7 @@ public class IO_ServerSync: NSObject {
 				urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
 				urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
 			}else{
-				urlRequest.addValue("text/html; charset=utf-8", forHTTPHeaderField: "Accept")
+				urlRequest.addValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
 			}
 			urlRequest.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
 			
@@ -191,7 +191,7 @@ public class IO_ServerSync: NSObject {
 			}
 			
 			urlData = NSMutableData()
-			UIApplication.sharedApplication().networkActivityIndicatorVisible		= true
+			UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in
 				
 				self.syncConnection = NSURLConnection(request: urlRequest, delegate: self, startImmediately: false)
@@ -263,7 +263,7 @@ public class IO_ServerSync: NSObject {
 	}
 
 	// connection failed
-	func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+	public func connection(connection: NSURLConnection, didFailWithError error: NSError) {
 		
 		connection.cancel()
 		UIApplication.sharedApplication().networkActivityIndicatorVisible		= false
@@ -285,7 +285,7 @@ public class IO_ServerSync: NSObject {
 	}
 		
 	// request complete
-	func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+	public func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
 		
 		let httpResponse = response as! NSHTTPURLResponse
 		let code = httpResponse.statusCode
@@ -293,6 +293,9 @@ public class IO_ServerSync: NSObject {
 		if(code < 200 || code >= 300) {
 			
 			internalServerError				= true
+			#if NETWORK_DEBUG
+				print("Internal server error! \(code)\n")
+			#endif
 		}else{
 			#if NETWORK_DEBUG
 			print("Connection receive response! \(code)\n")
@@ -301,7 +304,7 @@ public class IO_ServerSync: NSObject {
 	}
 		
 	// synchronization data
-	func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+	public func connection(connection: NSURLConnection, didReceiveData data: NSData) {
 		
 		if (data.length == 0) {
 			return;
@@ -311,12 +314,11 @@ public class IO_ServerSync: NSObject {
 	}
 		
 	// synchronization finished
-	func connectionDidFinishLoading(connection: NSURLConnection) {
+	public func connectionDidFinishLoading(connection: NSURLConnection) {
 		
 		UIApplication.sharedApplication().networkActivityIndicatorVisible		= false
 		connectionFinished		= true
 		NSRunLoop.currentRunLoop().cancelPerformSelectorsWithTarget(self)
-		self.requestUrl = nil
 		self.parameters = nil
 		self.customHeaders = nil
 		self.syncConnection = nil
@@ -345,6 +347,7 @@ public class IO_ServerSync: NSObject {
 			#endif
 		}
 		
+		self.requestUrl = nil
 		if(self.isJsonRequest) {
 			
 			let responseData = IO_Json.JSONParseDictionary(dataString)
@@ -355,7 +358,7 @@ public class IO_ServerSync: NSObject {
 	}
 	
 	// set connection protection rules for secure urls
-	func connection(connection: NSURLConnection, canAuthenticateAgainstProtectionSpace protectionSpace: NSURLProtectionSpace) -> Bool {
+	public func connection(connection: NSURLConnection, canAuthenticateAgainstProtectionSpace protectionSpace: NSURLProtectionSpace) -> Bool {
 		
 		let protectionMethod = protectionSpace.authenticationMethod
 		
