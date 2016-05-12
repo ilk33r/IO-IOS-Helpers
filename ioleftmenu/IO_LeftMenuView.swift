@@ -105,7 +105,7 @@ public class IO_LeftMenuView: UIView, UIGestureRecognizerDelegate, UITableViewDa
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let cellId = "leftMenuBtn-\(indexPath.row + 1)"
-		let currentButtonAction: Selector = "btnLeftMenuTapped:"
+		let currentButtonAction: Selector = #selector(IO_LeftMenuView.btnLeftMenuTapped(_:))
 		
 		var tableViewCell: UITableViewCell!	= tableView.dequeueReusableCellWithIdentifier(cellId)
 		

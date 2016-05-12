@@ -162,8 +162,8 @@ public class IO_ServerSync: NSObject, NSURLConnectionDelegate {
 			urlRequest.HTTPMethod = self.requestMethodString
 			
 			if(self.isJsonRequest) {
-				urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
-				urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+				urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+				urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 			}else{
 				urlRequest.addValue("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", forHTTPHeaderField: "Accept")
 			}
