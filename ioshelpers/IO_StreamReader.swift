@@ -10,22 +10,22 @@
 import Foundation
 
 /// Stream file reader class
-public class IO_StreamReader  {
+open class IO_StreamReader  {
 	
-	private let chunkSize: UInt64
+	fileprivate let chunkSize: UInt64
 	
-	private var fileHandle: NSFileHandle!
+	fileprivate var fileHandle: FileHandle!
 	
-	private var atEof = false
-	private var currentSeek: UInt64 = 0
+	fileprivate var atEof = false
+	fileprivate var currentSeek: UInt64 = 0
 	
 	/// File path, chink size
-	public init? (pathUrl: NSURL!, chunkSize: UInt64 = 4096) {
+	public init? (pathUrl: URL!, chunkSize: UInt64 = 4096) {
 		
 		self.chunkSize = chunkSize
 		
 		do {
-			self.fileHandle = try NSFileHandle(forReadingFromURL: pathUrl)
+			self.fileHandle = try FileHandle(forReadingFrom: pathUrl)
 			
 		} catch let error as NSError {
 			print("Could not open file. \(error.description)")
@@ -39,7 +39,7 @@ public class IO_StreamReader  {
 	}
 	
 	/// Read part of file
-	public func getChunkData() -> NSData? {
+	open func getChunkData() -> Data? {
 		
 		precondition(fileHandle != nil, "Attempt to read from closed file")
 		
@@ -49,9 +49,9 @@ public class IO_StreamReader  {
 		
 		// Read data chunks from file until a line delimiter is found:
 		//let range = NSRange(location: Int(currentSeek), length: Int(chunkSize))
-		let tmpData = fileHandle.readDataOfLength(Int(chunkSize))
+		let tmpData = fileHandle.readData(ofLength: Int(chunkSize))
 		
-		if tmpData.length == 0 {
+		if tmpData.count == 0 {
 			// EOF or read error.
 			atEof = true
 			return nil
@@ -63,14 +63,14 @@ public class IO_StreamReader  {
 	}
 	
 	/// Start reading from the beginning of file.
-	public func rewind() -> Void {
+	open func rewind() -> Void {
 		
-		fileHandle.seekToFileOffset(0)
+		fileHandle.seek(toFileOffset: 0)
 		atEof = false
 	}
 	
 	/// Close the underlying file. No reading must be done after calling this method.
-	public func close() {
+	open func close() {
 		
 		fileHandle?.closeFile()
 		fileHandle = nil

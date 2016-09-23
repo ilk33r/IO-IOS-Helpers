@@ -28,7 +28,7 @@ class ioshelpersTests: XCTestCase {
 		// This is an example of a functional test case.
 		// Use XCTAssert and related functions to verify your tests produce the correct results.
 		
-		let currentBundle = NSBundle(forClass: self.classForCoder)
+		let currentBundle = Bundle(for: self.classForCoder)
 		
 		let errorMessage = IO_Helpers.getErrorMessageFromCode(9001, bundle: currentBundle)
 		print("\n 1- Testing error messages \n\(errorMessage.0)\n\(errorMessage.1)\n\(errorMessage.2)")
@@ -69,7 +69,7 @@ class ioshelpersTests: XCTestCase {
 		}
 		
 		while(waitingBlocks) {
-			NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate().dateByAddingTimeInterval(-0.1))
+			RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date().addingTimeInterval(-0.1))
 		}
 	}
 	
@@ -81,7 +81,7 @@ class ioshelpersTests: XCTestCase {
         var elapsedTimeVal = 0
 		print("Testing timer ...\n\n")
 		
-        let timer = IO_Timer(withTimeInterval: NSTimeInterval(0.03)) { (timeElapsed) -> Void in
+        let timer = IO_Timer(withTimeInterval: TimeInterval(0.03)) { (timeElapsed) -> Void in
 			
 			timerExecuteCount += 1
             elapsedTimeVal  = timeElapsed
@@ -91,7 +91,7 @@ class ioshelpersTests: XCTestCase {
 		}
 		
 		while(waitingBlocks) {
-			NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate().dateByAddingTimeInterval(-0.1))
+			RunLoop.current.run(mode: RunLoopMode.defaultRunLoopMode, before: Date().addingTimeInterval(-0.1))
 			
 			if(timerExecuteCount > 3) {
 				timer.StopTimer()
@@ -158,7 +158,7 @@ class ioshelpersTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 /// Media caching handler
-public typealias IO_MediaCachingResponseHandler = (success : Bool, image : UIImage!) -> Void
+public typealias IO_MediaCachingResponseHandler = (_ success : Bool, _ image : UIImage?) -> Void
 
 private class IO_MediaCachingRequestUrls {
 	
@@ -23,13 +23,13 @@ private class IO_MediaCachingRequestUrls {
 		return Singleton.instance
 	}
 	
-	private var wishList : [String]!
+	fileprivate var wishList : [String]!
 	
 	init() {
 		self.wishList		= [String]()
 	}
 	
-	func addImage(imageName : String) -> Bool {
+	func addImage(_ imageName : String) -> Bool {
 		
 		var imageIsNotRequesting		= true
 		
@@ -50,13 +50,13 @@ private class IO_MediaCachingRequestUrls {
 		return imageIsNotRequesting
 	}
 	
-	func removeImage(imageName : String) {
+	func removeImage(_ imageName : String) {
 		
-		for (index, value) in wishList.enumerate()
+		for (index, value) in wishList.enumerated()
 		{
 			if(value == imageName)
 			{
-				wishList.removeAtIndex(index)
+				wishList.remove(at: index)
 				break
 			}
 		}
@@ -68,18 +68,18 @@ private class IO_MediaCachingRequestUrls {
 }
 
 /// Media Caching
-public class IO_MediaCaching: NSObject {
+open class IO_MediaCaching: NSObject {
 	
-	private var tryCount = 0
-	private var cachingCompletitionHandler : IO_MediaCachingResponseHandler!
-	private var requestFile : String!
-	private var urlData : NSMutableData!
-	private var syncConnection: NSURLConnection!
+	fileprivate var tryCount = 0
+	fileprivate var cachingCompletitionHandler : IO_MediaCachingResponseHandler!
+	fileprivate var requestFile : String!
+	fileprivate var urlData : NSMutableData!
+	fileprivate var syncConnection: NSURLConnection!
 
-	private var md5FileName = ""
+	fileprivate var md5FileName = ""
 	
 	/// Media Caching
-	public init(getMediaImage fileUrl : String!, completionHandler : IO_MediaCachingResponseHandler) {
+	public init(getMediaImage fileUrl : String!, completionHandler : @escaping IO_MediaCachingResponseHandler) {
 		super.init()
 		
 		if(fileUrl != nil) {
@@ -87,25 +87,25 @@ public class IO_MediaCaching: NSObject {
 			if(!fileUrl.isEmpty) {
 				self.getMediaImage(fileUrl, completionHandler: completionHandler)
 			}else{
-				completionHandler(success: false, image: nil)
+				completionHandler(false, nil)
 			}
 		}else{
-			completionHandler(success: false, image: nil)
+			completionHandler(false, nil)
 		}
 		
 	}
 	
 	// get image if exists in cache
-	private func getMediaImage(fileUrl : String, completionHandler : IO_MediaCachingResponseHandler) {
+	fileprivate func getMediaImage(_ fileUrl : String, completionHandler : @escaping IO_MediaCachingResponseHandler) {
 		
 		md5FileName = fileUrl.IO_md5() + "-cached.img"
 
 		if(IO_MediaCaching.mediaExists(md5FileName)) {
 
-			let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).stringByAppendingPathComponent(md5FileName)
-			let fileUrl = NSURL(fileURLWithPath: cachefile)
-			let fileData = NSData(contentsOfURL: fileUrl)
-			completionHandler(success: true, image: UIImage(data: fileData!))
+			let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).appendingPathComponent(md5FileName)
+			let fileUrl = URL(fileURLWithPath: cachefile)
+			let fileData = try? Data(contentsOf: fileUrl)
+			completionHandler(true, UIImage(data: fileData!))
 		}else{
 			if(IO_MediaCachingRequestUrls.sharedInstance.addImage(fileUrl)) {
 				cachingCompletitionHandler	= completionHandler
@@ -113,51 +113,51 @@ public class IO_MediaCaching: NSObject {
 				requestFile = fileUrl
 				startRequest()
 			}else{
-				completionHandler(success: false, image: nil)
+				completionHandler(false, nil)
 			}
 		}
 	}
 	
 	// start image download process
-	private func startRequest() {
+	fileprivate func startRequest() {
 
-		let requestUrl = NSURL(string: self.requestFile)
-		let urlRequest = NSMutableURLRequest(URL: requestUrl!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 90)
+		let requestUrl = URL(string: self.requestFile)
+		let urlRequest = NSMutableURLRequest(url: requestUrl!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 90)
 		
 		urlRequest.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
 		self.urlData = NSMutableData()
 		
-		dispatch_async(dispatch_get_main_queue(), { () -> Void in
+		DispatchQueue.main.async(execute: { () -> Void in
 
-			self.syncConnection	= NSURLConnection(request: urlRequest, delegate: self, startImmediately: false)
-			self.syncConnection?.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+			self.syncConnection	= NSURLConnection(request: urlRequest as URLRequest, delegate: self, startImmediately: false)
+			self.syncConnection?.schedule(in: RunLoop.current, forMode: RunLoopMode.commonModes)
 			self.syncConnection?.start()
 		})
 		
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 	}
 	
 	// request complete
-	func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+	func connection(_ connection: NSURLConnection, didReceiveResponse response: URLResponse) {
 		
-		let httpResponse = response as! NSHTTPURLResponse
+		let httpResponse = response as! HTTPURLResponse
 		let code = httpResponse.statusCode
 		
 		if(code < 200 || code >= 300) {
 
-			NSRunLoop.currentRunLoop().cancelPerformSelectorsWithTarget(self)
+			RunLoop.current.cancelPerformSelectors(withTarget: self)
 			connection.cancel()
 			
-			self.tryCount++
+			self.tryCount += 1
 			
 			if(self.tryCount < 3) {
 				
-				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+				UIApplication.shared.isNetworkActivityIndicatorVisible = false
 				IO_MediaCachingRequestUrls.sharedInstance.removeImage(requestFile)
 				
-				let dispatchDelay		= dispatch_time(DISPATCH_TIME_NOW, Int64(1))
+				let dispatchDelay		= DispatchTime.now() + Double(Int64(1)) / Double(NSEC_PER_SEC)
 				
-				dispatch_after(dispatchDelay, dispatch_get_main_queue(), { () -> Void in
+				DispatchQueue.main.asyncAfter(deadline: dispatchDelay, execute: { () -> Void in
 					self.startRequest()
 				})
 				
@@ -171,23 +171,23 @@ public class IO_MediaCaching: NSObject {
 	}
 	
 	// image downloading
-	func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-		if (data.length == 0) {
+	func connection(_ connection: NSURLConnection, didReceiveData data: Data) {
+		if (data.count == 0) {
 			return;
 		}
 		
-		urlData.appendData(data)
+		urlData.append(data)
 	}
 	
 	// download complete
-	func connectionDidFinishLoading(connection: NSURLConnection) {
+	func connectionDidFinishLoading(_ connection: NSURLConnection) {
 		
-		NSRunLoop.currentRunLoop().cancelPerformSelectorsWithTarget(self)
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+		RunLoop.current.cancelPerformSelectors(withTarget: self)
+		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
-		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).stringByAppendingPathComponent(md5FileName)
+		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).appendingPathComponent(md5FileName)
 		
-		urlData.writeToFile(cachefile as String, atomically: false)
+		urlData.write(toFile: cachefile as String, atomically: false)
 		IO_MediaCachingRequestUrls.sharedInstance.removeImage(requestFile)
 		
 		connection.cancel()
@@ -203,21 +203,21 @@ public class IO_MediaCaching: NSObject {
 	}
 	
 	// download failed
-	func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+	func connection(_ connection: NSURLConnection, didFailWithError error: NSError) {
 		
-		NSRunLoop.currentRunLoop().cancelPerformSelectorsWithTarget(self)
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+		RunLoop.current.cancelPerformSelectors(withTarget: self)
+		UIApplication.shared.isNetworkActivityIndicatorVisible = false
 		connection.cancel()
 		
-		self.tryCount++
+		self.tryCount += 1
 		
 		if(self.tryCount < 3) {
 			
-			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+			UIApplication.shared.isNetworkActivityIndicatorVisible = false
 			IO_MediaCachingRequestUrls.sharedInstance.removeImage(requestFile)
 
-			let dispatchDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(1))
-			dispatch_after(dispatchDelay, dispatch_get_main_queue(), { () -> Void in
+			let dispatchDelay = DispatchTime.now() + Double(Int64(1)) / Double(NSEC_PER_SEC)
+			DispatchQueue.main.asyncAfter(deadline: dispatchDelay, execute: { () -> Void in
 				self.startRequest()
 			})
 		}else{
@@ -230,22 +230,22 @@ public class IO_MediaCaching: NSObject {
 	}
 	
 	/// Convert url to cache file name
-	static func convertUrlToFileName(fileUrl: String) -> String {
+	static func convertUrlToFileName(_ fileUrl: String) -> String {
 		
 		let md5FileName = fileUrl.IO_md5() + "-cached.img"
 		return md5FileName;
 	}
 	
 	/// Check media exists in the cache
-	static func mediaExists(fileName : String) -> Bool {
+	static func mediaExists(_ fileName : String) -> Bool {
 		
 		var cachefile = IO_Helpers.getMediaCacheDirectory
 
 		if(cachefile != nil) {
 			
-			cachefile = NSString(string: cachefile!).stringByAppendingPathComponent(fileName)
+			cachefile = NSString(string: cachefile!).appendingPathComponent(fileName)
 			
-			if(NSFileManager.defaultManager().fileExistsAtPath(cachefile!))
+			if(FileManager.default.fileExists(atPath: cachefile!))
 			{
 				return true
 			}else{
@@ -257,67 +257,67 @@ public class IO_MediaCaching: NSObject {
 	}
 	
 	/// Get base64 encoded image
-	static func getMediaImageForBase64Encoded(fileName : String) -> String! {
+	static func getMediaImageForBase64Encoded(_ fileName : String) -> String! {
 
 		if(IO_MediaCaching.mediaExists(fileName)) {
-			let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).stringByAppendingPathComponent(fileName)
-			let fileUrl = NSURL(fileURLWithPath: cachefile)
-			let fileData = NSData(contentsOfURL: fileUrl)
-			return (fileData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength))!
+			let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).appendingPathComponent(fileName)
+			let fileUrl = URL(fileURLWithPath: cachefile)
+			let fileData = try? Data(contentsOf: fileUrl)
+			return (fileData?.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters))!
 		}else{
 			return nil
 		}
 	}
 
 	/// Save file to cache directory
-	static func saveFileToCache(fileName: String!, fileContent: NSData!) {
+	static func saveFileToCache(_ fileName: String!, fileContent: Data!) {
 		
-		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).stringByAppendingPathComponent(fileName)
-		fileContent.writeToFile(cachefile, atomically: false)
+		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).appendingPathComponent(fileName)
+		fileContent.write(to: cachefile, options: false)
 	}
 	
 	/// Remove file from cache directory
-	static func removeFileFromCache(fileName: String!) {
+	static func removeFileFromCache(_ fileName: String!) {
 		
-		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).stringByAppendingPathComponent(fileName)
+		let cachefile = NSString(string: IO_Helpers.getMediaCacheDirectory!).appendingPathComponent(fileName)
 		do {
-			try NSFileManager.defaultManager().removeItemAtPath(cachefile)
+			try FileManager.default.removeItem(atPath: cachefile)
 		} catch _ {
 		}
 	}
 	
 	// delete old images and clear whishlist
-	class func clearCache(timeInterval: NSTimeInterval = -604800) {
+	class func clearCache(_ timeInterval: TimeInterval = -604800) {
 		
 		let cacheDirectory = IO_Helpers.getMediaCacheDirectory
 		
 		if(cacheDirectory != nil) {
-			let files = NSFileManager.defaultManager().enumeratorAtPath(cacheDirectory!)
+			let files = FileManager.default.enumerator(atPath: cacheDirectory!)
 			var fileCount = 0
 			
 			while let file: String = files?.nextObject() as? String {
 				
-				let filePath = NSString(string: cacheDirectory!).stringByAppendingPathComponent(file)
-				let fileAttributes = try? NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+				let filePath = NSString(string: cacheDirectory!).appendingPathComponent(file)
+				let fileAttributes = try? FileManager.default.attributesOfItem(atPath: filePath)
 			
 				if(fileAttributes != nil) {
 					
-					if let fileCreateDate = fileAttributes?[NSFileCreationDate] as? NSDate {
+					if let fileCreateDate = fileAttributes?[FileAttributeKey.creationDate] as? Date {
 						
 						let fileCreateEpoch = fileCreateDate.timeIntervalSince1970
-						let timeInterval = NSDate().dateByAddingTimeInterval(timeInterval).timeIntervalSince1970
+						let timeInterval = Date().addingTimeInterval(timeInterval).timeIntervalSince1970
 						
 						if(fileCreateEpoch < timeInterval) {
 							
 							do {
-								try NSFileManager.defaultManager().removeItemAtPath(filePath)
+								try FileManager.default.removeItem(atPath: filePath)
 							} catch _ {
 							}
 						}
 					}
 				}
 				
-				fileCount++
+				fileCount += 1
 			}
 		}
 		

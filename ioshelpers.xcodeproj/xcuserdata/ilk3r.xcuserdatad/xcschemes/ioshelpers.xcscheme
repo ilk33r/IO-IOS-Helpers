@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -87,16 +87,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DEE928881C62BC3300326DAC"
-            BuildableName = "frameworktest.app"
-            BlueprintName = "frameworktest"
-            ReferencedContainer = "container:../frameworktest/frameworktest.xcodeproj">
+            BlueprintIdentifier = "DEE928311C629EB000326DAC"
+            BuildableName = "IO_IOS_Helpers.framework"
+            BlueprintName = "IO_IOS_Helpers"
+            ReferencedContainer = "container:ioshelpers.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

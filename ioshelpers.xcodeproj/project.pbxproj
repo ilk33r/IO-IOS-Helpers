@@ -29,6 +29,9 @@
 		DE529BCB1C64C59B002F7A84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8F1C64B60D002F7A84 /* Foundation.framework */; };
 		DE529BCC1C64C5A0002F7A84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE529B8D1C64B5F2002F7A84 /* UIKit.framework */; };
 		DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */; };
+		DEB727171D9574B800FD177E /* IO_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB727161D9574B800FD177E /* IO_String.swift */; };
+		DEB727191D9575DA00FD177E /* IO_NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB727181D9575DA00FD177E /* IO_NetworkHelper.swift */; };
+		DEDD22371CE9E7D200A5FCF1 /* IO_IOS_Helpers-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = DEE9285E1C62A6BA00326DAC /* IO_IOS_Helpers-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DEE9283D1C629EB000326DAC /* IO_IOS_Helpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */; };
 		DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */; };
 		DEE928511C62A17600326DAC /* IO_Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE928501C62A17600326DAC /* IO_Encryption.swift */; };
@@ -94,6 +97,9 @@
 		DE8EF12A1C633CDB00739B0E /* Build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = Build.sh; path = BuildScripts/Build.sh; sourceTree = "<group>"; };
 		DE8EF12D1C633D3400739B0E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = BuildScripts/Settings.bundle; sourceTree = "<group>"; };
 		DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_MediaCaching.swift; sourceTree = "<group>"; };
+		DEB727161D9574B800FD177E /* IO_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_String.swift; sourceTree = "<group>"; };
+		DEB727181D9575DA00FD177E /* IO_NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_NetworkHelper.swift; sourceTree = "<group>"; };
+		DEDD22381CE9EA3E00A5FCF1 /* build-test.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "build-test.sh"; path = "Travis/build-test.sh"; sourceTree = "<group>"; };
 		DEE928321C629EB000326DAC /* IO_IOS_Helpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IO_IOS_Helpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE9283C1C629EB000326DAC /* ioshelpersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ioshelpersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO_DateTime.swift; sourceTree = "<group>"; };
@@ -266,6 +272,7 @@
 		DEE928341C629EB000326DAC /* ioshelpers */ = {
 			isa = PBXGroup;
 			children = (
+				DEB727181D9575DA00FD177E /* IO_NetworkHelper.swift */,
 				DE4FF7181C639C7F004CD87A /* IO_Timer.swift */,
 				DE4FF7141C638A10004CD87A /* IO_ServerSync.swift */,
 				DE8EF1331C63501300739B0E /* IO_MediaCaching.swift */,
@@ -275,6 +282,7 @@
 				DEE928501C62A17600326DAC /* IO_Encryption.swift */,
 				DEE9284E1C62A0FB00326DAC /* IO_DateTime.swift */,
 				DE3908F11C67D772005A38D3 /* IO_KeyboardListener.swift */,
+				DEB727161D9574B800FD177E /* IO_String.swift */,
 				DEE9285E1C62A6BA00326DAC /* IO_IOS_Helpers-Bridging.h */,
 				DEE92DD41C62C00A00326DAC /* ioshelpers.h */,
 				DEE92DD91C62C02E00326DAC /* Info.plist */,
@@ -294,6 +302,7 @@
 		DEF542501C7BC6520002148C /* Travis */ = {
 			isa = PBXGroup;
 			children = (
+				DEDD22381CE9EA3E00A5FCF1 /* build-test.sh */,
 				DEF542511C7BC6800002148C /* before_script.sh */,
 				DEF542521C7BC6A00002148C /* script.sh */,
 			);
@@ -324,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEE92DD61C62C00A00326DAC /* ioshelpers.h in Headers */,
+				DEDD22371CE9E7D200A5FCF1 /* IO_IOS_Helpers-Bridging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +385,6 @@
 				DE4FF73D1C63B687004CD87A /* Frameworks */,
 				DE4FF73E1C63B687004CD87A /* Headers */,
 				DE4FF73F1C63B687004CD87A /* Resources */,
-				DE4FF7581C63B82D004CD87A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -412,7 +421,6 @@
 				DEE9282E1C629EB000326DAC /* Frameworks */,
 				DEE9282F1C629EB000326DAC /* Headers */,
 				DEE928301C629EB000326DAC /* Resources */,
-				DEE92DEC1C62C83C00326DAC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -448,7 +456,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = ilkerozcan;
 				TargetAttributes = {
 					DE4FF71E1C63A655004CD87A = {
@@ -465,9 +473,11 @@
 					};
 					DEE928311C629EB000326DAC = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					DEE9283B1C629EB000326DAC = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -553,32 +563,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n\n# Constants\nSF_TARGET_NAME=${PROJECT_NAME}\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/IO_IOS_Helpers-${CONFIGURATION}-universal\n\n# Take build target\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\n#if [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\n#then\n#echo \"Please choose iPhone simulator as the build target.\"\n#exit 1\n#fi\n\nIPHONE_DEVICE_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n# Build the other (non-simulator) platform\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/arm64\" SYMROOT=\"${SYMROOT}\" ARCHS='arm64' VALID_ARCHS='arm64' $ACTION\n\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\"  CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/armv7\" SYMROOT=\"${SYMROOT}\" ARCHS='armv7 armv7s' VALID_ARCHS='armv7 armv7s' $ACTION\n\n# Copy the framework structure to the universal folder (clean it first)\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-${SF_SDK_PLATFORM}/${PRODUCT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework\"\n\n# Smash them together to combine all architectures\n#lipo -create  \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/arm64/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/armv7/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" -output \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"";
 		};
-		DE4FF7581C63B82D004CD87A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n\n# Constants\nSF_TARGET_NAME=${PROJECT_NAME}\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/IO_IOS_Helpers-${CONFIGURATION}-universal\n\n# Take build target\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\n#if [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\n#then\n#echo \"Please choose iPhone simulator as the build target.\"\n#exit 1\n#fi\n\nIPHONE_DEVICE_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n# Build the other (non-simulator) platform\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/arm64\" SYMROOT=\"${SYMROOT}\" ARCHS='arm64' VALID_ARCHS='arm64' $ACTION\n\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\"  CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/armv7\" SYMROOT=\"${SYMROOT}\" ARCHS='armv7 armv7s' VALID_ARCHS='armv7 armv7s' $ACTION\n\n# Copy the framework structure to the universal folder (clean it first)\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-${SF_SDK_PLATFORM}/${PRODUCT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework\"\n\n# Smash them together to combine all architectures\n#lipo -create  \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/arm64/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/armv7/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" -output \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"";
-		};
-		DEE92DEC1C62C83C00326DAC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\n\n# Constants\nSF_TARGET_NAME=${PROJECT_NAME}\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/IO_IOS_Helpers-${CONFIGURATION}-universal\n\n# Take build target\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\n#if [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\n#then\n#echo \"Please choose iPhone simulator as the build target.\"\n#exit 1\n#fi\n\nIPHONE_DEVICE_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n# Build the other (non-simulator) platform\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/arm64\" SYMROOT=\"${SYMROOT}\" ARCHS='arm64' VALID_ARCHS='arm64' $ACTION\n\n#xcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\"  CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}/armv7\" SYMROOT=\"${SYMROOT}\" ARCHS='armv7 armv7s' VALID_ARCHS='armv7 armv7s' $ACTION\n\n# Copy the framework structure to the universal folder (clean it first)\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-${SF_SDK_PLATFORM}/${PRODUCT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework\"\n\n# Smash them together to combine all architectures\n#lipo -create  \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/arm64/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/armv7/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\" -output \"${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -624,11 +608,13 @@
 				DE4FF7191C639C7F004CD87A /* IO_Timer.swift in Sources */,
 				DEE928571C62A2E900326DAC /* IO_StreamReader.swift in Sources */,
 				DE3908F21C67D772005A38D3 /* IO_KeyboardListener.swift in Sources */,
+				DEB727171D9574B800FD177E /* IO_String.swift in Sources */,
 				DE8EF1341C63501300739B0E /* IO_MediaCaching.swift in Sources */,
 				DEE928551C62A2A900326DAC /* IO_Json.swift in Sources */,
 				DEE9284F1C62A0FB00326DAC /* IO_DateTime.swift in Sources */,
 				DE4FF7151C638A10004CD87A /* IO_ServerSync.swift in Sources */,
 				DEE928531C62A21D00326DAC /* IO_Common.swift in Sources */,
+				DEB727191D9575DA00FD177E /* IO_NetworkHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +650,7 @@
 		DE4FF7311C63A655004CD87A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -681,6 +668,7 @@
 		DE4FF7321C63A655004CD87A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -693,7 +681,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.iocoredatahelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -721,6 +709,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -739,6 +728,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -751,7 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioleftmenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -788,8 +778,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -836,8 +828,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -857,6 +851,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -869,6 +864,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -881,12 +877,13 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				OTHER_SWIFT_FLAGS = "-D NETWORK_DEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioioshelpers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ioshelpers/IO_IOS_Helpers-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -895,6 +892,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -908,12 +906,13 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				OTHER_SWIFT_FLAGS = "-D NETWORK_DEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioioshelpers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ioshelpers/IO_IOS_Helpers-Bridging.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -926,6 +925,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -937,6 +937,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilker.ioshelpersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

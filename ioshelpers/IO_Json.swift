@@ -15,11 +15,11 @@ public struct IO_Json
 	public static func JSONStringify(value: AnyObject, prettyPrinted: Bool = false) -> String {
 		
 		//var options = prettyPrinted ? NSJSONWritingOptions.PrettyPrinted : nil
-		let options: NSJSONWritingOptions?  = (prettyPrinted) ? NSJSONWritingOptions.PrettyPrinted : NSJSONWritingOptions(rawValue: 0)
+		let options: JSONSerialization.WritingOptions?  = (prettyPrinted) ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions(rawValue: 0)
 		
-		if NSJSONSerialization.isValidJSONObject(value) {
-			if let data = try? NSJSONSerialization.dataWithJSONObject(value, options: options!) {
-				return NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+		if JSONSerialization.isValidJSONObject(value) {
+			if let data = try? JSONSerialization.data(withJSONObject: value, options: options!) {
+				return NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
 			}
 		}
 		
@@ -28,9 +28,9 @@ public struct IO_Json
 	
 	/// JSON to array
 	public static func JSONParseArray(jsonString: String) -> [AnyObject] {
-		if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
+		if let data = jsonString.data(using: String.Encoding.utf8)
 		{
-			if let array = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)))  as? [AnyObject] {
+			if let array = (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)))  as? [AnyObject] {
 				return array
 			}
 		}
@@ -39,8 +39,8 @@ public struct IO_Json
 	
 	/// JSON to object
 	public static func JSONParseDictionary(jsonString: String) -> [String: AnyObject] {
-		if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
-			if let dictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)))  as? [String: AnyObject] {
+		if let data = jsonString.data(using: String.Encoding.utf8) {
+			if let dictionary = (try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)))  as? [String: AnyObject] {
 				return dictionary
 			}
 		}

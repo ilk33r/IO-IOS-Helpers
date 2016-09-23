@@ -10,24 +10,24 @@
 import Foundation
 import Dispatch
 
-public typealias IO_TimerResponseHandler = (elapsedSteps: Int) -> Void
+public typealias IO_TimerResponseHandler = (_ elapsedSteps: Int) -> Void
 
 
 /// Timer class
-public class IO_Timer: NSObject {
+open class IO_Timer: NSObject {
 	
-	private let timerInterval: NSTimeInterval
+	fileprivate let timerInterval: TimeInterval
 	
-	private var completitionHandler: IO_TimerResponseHandler!
-	private var timer: NSTimer!
-	private var isUpdating = false
+	fileprivate var completitionHandler: IO_TimerResponseHandler!
+	fileprivate var timer: Timer!
+	fileprivate var isUpdating = false
     
-    private var stepsElapsed:Int = 0
+    fileprivate var stepsElapsed:Int = 0
     
     
 	
 	/// Timer class
-	public init(withTimeInterval timerInterval: NSTimeInterval, completitionHandler: IO_TimerResponseHandler!) {
+	public init(withTimeInterval timerInterval: TimeInterval, completitionHandler: IO_TimerResponseHandler!) {
 		
 		self.timerInterval = timerInterval
 		self.completitionHandler = completitionHandler
@@ -36,15 +36,15 @@ public class IO_Timer: NSObject {
 		self.Start()
 	}
 
-	private func Start() {
+	fileprivate func Start() {
         
          stepsElapsed = 0
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: "Update", userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(IO_Timer.Update), userInfo: nil, repeats: true)
         
 	}
 	
 	/// Stop timer
-	public func StopTimer() {
+	open func StopTimer() {
 		
 		if(timer != nil) {
 			timer.invalidate()
@@ -56,7 +56,7 @@ public class IO_Timer: NSObject {
 	}
 	
 	// call update
-	public func Update() {
+	open func Update() {
 		
 		if(isUpdating) {
 			return
@@ -65,7 +65,7 @@ public class IO_Timer: NSObject {
 		isUpdating = true
 		
         stepsElapsed += 1
-		dispatch_async(dispatch_get_main_queue(), { () -> Void in
+		DispatchQueue.main.async(execute: { () -> Void in
 			
 			if(self.completitionHandler != nil) {
 				self.completitionHandler(elapsedSteps: self.stepsElapsed)

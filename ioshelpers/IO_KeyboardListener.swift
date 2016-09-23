@@ -17,7 +17,7 @@ public protocol IO_KeyboardListenerDelegate {
 
 // TODO: Create test case
 /// Listen keyboard events
-public class IO_KeyboardListener {
+open class IO_KeyboardListener {
 
 	var delegate: IO_KeyboardListenerDelegate!
 	
@@ -25,28 +25,28 @@ public class IO_KeyboardListener {
 	public init(withDelegate delegate: IO_KeyboardListenerDelegate!) {
 		
 		self.delegate = delegate
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillDismiss:", name: UIKeyboardWillHideNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillDismiss:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
 	deinit {
 		self.delegate = nil
-		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	internal func keyboardWillShow(notification : NSNotification) {
-		let keyboardInfo					= notification.userInfo!
+	internal func keyboardWillShow(_ notification : Notification) {
+		let keyboardInfo					= (notification as NSNotification).userInfo!
 		let endFrameValue :NSValue			= keyboardInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
-		let endFrame						= endFrameValue.CGRectValue()
-		let distance						= CGRectGetHeight(endFrame)
+		let endFrame						= endFrameValue.cgRectValue
+		let distance						= endFrame.height
 
 		if(self.delegate != nil) {
 			self.delegate.IO_KeyboardListener(keyboardDidOpen: distance)
 		}
 	}
 	
-	internal func keyboardWillDismiss(notification : NSNotification) {
+	internal func keyboardWillDismiss(_ notification : Notification) {
 		
 		if(self.delegate != nil) {
 			self.delegate.IO_KeyboardListenerKeyboardWillDismiss()

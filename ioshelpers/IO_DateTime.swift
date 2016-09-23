@@ -10,16 +10,16 @@
 import Foundation
 
 /// Date Time Class
-public class IO_DateTime {
+open class IO_DateTime {
 	
-	private let currentDate	= NSDate()
-	private let dateFormat = "yyyy-LL-dd HH:mm:ss.S"
+	fileprivate let currentDate	= Date()
+	fileprivate let dateFormat = "yyyy-LL-dd HH:mm:ss.S"
 	
-	private var inputDate : NSDate!
-	private var inputString: String!
+	fileprivate var inputDate : Date!
+	fileprivate var inputString: String!
 	
 	/// NSDate To string (2015-09-01 14:03:00.000000)
-	public init(initWithNsDate date : NSDate!) {
+	public init(initWithNsDate date : Date!) {
 		
 		if(date == nil) {
 			
@@ -28,22 +28,22 @@ public class IO_DateTime {
 			inputDate = date
 		}
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		//2015-09-01 14:03:00.000000
 		formatter.dateFormat = self.dateFormat
-		formatter.timeZone = NSTimeZone(abbreviation: "GMT")
-		inputString = formatter.stringFromDate(date)
+		formatter.timeZone = TimeZone(abbreviation: "GMT")
+		inputString = formatter.string(from: date)
 	}
 	
 	/// String (2015-09-01 14:03:00.000000) to NSDate
 	public init(initWithString date: String!) {
 		inputString	= date
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		//2015-09-01 14:03:00.000000
 		formatter.dateFormat = self.dateFormat
-		formatter.timeZone = NSTimeZone(abbreviation: "GMT")
-		let formattedNsDate = formatter.dateFromString(date)
+		formatter.timeZone = TimeZone(abbreviation: "GMT")
+		let formattedNsDate = formatter.date(from: date)
 		
 		if(formattedNsDate == nil) {
 			
@@ -55,29 +55,29 @@ public class IO_DateTime {
 	}
 	
 	/// Return NSDate
-	public func getDate() -> NSDate! {
+	open func getDate() -> Date! {
 		return inputDate
 	}
 	
 	/// Return String
-	public func getDateString() -> String! {
+	open func getDateString() -> String! {
 		return inputString
 	}
 	
 	/// Return GMT NSDate
-	class func getCurrentGMTDate() -> NSDate {
-		let currentTime				= NSDate()
-		let timezone				= NSTimeZone(abbreviation: "GMT")
-		let formatter				= NSDateFormatter()
+	class func getCurrentGMTDate() -> Date {
+		let currentTime				= Date()
+		let timezone				= TimeZone(abbreviation: "GMT")
+		let formatter				= DateFormatter()
 		formatter.dateFormat		= "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 		formatter.timeZone			= timezone
-		let dateString				= formatter.stringFromDate(currentTime)
+		let dateString				= formatter.string(from: currentTime)
 		
-		return formatter.dateFromString(dateString)!
+		return formatter.date(from: dateString)!
 	}
 	
 	/// Return X Ago string from NSDate
-	public func getTimeAgoString() -> String!
+	open func getTimeAgoString() -> String!
 	{
 		let currentEpochTime		= currentDate.timeIntervalSince1970
 		let inputDateEpochTime		= inputDate.timeIntervalSince1970
@@ -119,7 +119,7 @@ public class IO_DateTime {
 	}
 	
 	/// Return Unix time
-	public func getUnixTimeStamp() -> Int {
+	open func getUnixTimeStamp() -> Int {
 		return Int(inputDate.timeIntervalSince1970)
 	}
 }

@@ -10,54 +10,54 @@
 import Foundation
 import UIKit
 
-private let Device = UIDevice.currentDevice()
+private let Device = UIDevice.current
 private let iosVersion = NSString(string: Device.systemVersion).doubleValue
-private let AppBundle = NSBundle.mainBundle()
+private let AppBundle = Bundle.main
 
 /// Helpers class
-public class IO_Helpers: NSObject {
+open class IO_Helpers: NSObject {
 	
 	/// Return bundle id
-	public static let bundleID = AppBundle.bundleIdentifier!
+	open static let bundleID = AppBundle.bundleIdentifier!
 	
 	/// Is iOS 10
-	public static let iOS10 = iosVersion >= 10
+	open static let iOS10 = iosVersion >= 10
 	/// Is iOS 9
-	public static let iOS9 = iosVersion >= 9 && iosVersion < 10
+	open static let iOS9 = iosVersion >= 9 && iosVersion < 10
 	/// Is iOS 8
-	public static let iOS8 = iosVersion >= 8 && iosVersion < 9
+	open static let iOS8 = iosVersion >= 8 && iosVersion < 9
 	/// Is iOS 7
-	public static let iOS7 = iosVersion >= 7 && iosVersion < 8
+	open static let iOS7 = iosVersion >= 7 && iosVersion < 8
 	
 	/// Returns device uuid
-	public static let deviceUUID = Device.identifierForVendor!.UUIDString
+	open static let deviceUUID = Device.identifierForVendor!.uuidString
 	
 	/// Returns application name
-	public static let applicationName = AppBundle.infoDictionary!["CFBundleName"] as! String
+	open static let applicationName = AppBundle.infoDictionary!["CFBundleName"] as! String
 	
 	/// Returns application version
-	public static let applicationVersion = (AppBundle.infoDictionary!["CFBundleShortVersionString"] as! String) + " (" + (AppBundle.infoDictionary!["CFBundleVersion"] as! String) + ")"
+	open static let applicationVersion = (AppBundle.infoDictionary!["CFBundleShortVersionString"] as! String) + " (" + (AppBundle.infoDictionary!["CFBundleVersion"] as! String) + ")"
 	
 	/// Returns device name
-	public static let deviceName = Device.name
+	open static let deviceName = Device.name
 	/// Returns device model
-	public static let devicModel = Device.model
+	open static let devicModel = Device.model
 	/// Returns device version
-	public static let deviceVersion = "\(iosVersion)"
+	open static let deviceVersion = "\(iosVersion)"
 	
 	/// Get error message (title, message, cancel button title)
-	public static func getErrorMessageFromCode(errorCode : Int, bundle: NSBundle? = nil) -> (String?, String?, String?) {
+	open static func getErrorMessageFromCode(_ errorCode : Int, bundle: Bundle? = nil) -> (String?, String?, String?) {
 		
 		let selectedBundle = (bundle != nil) ? bundle! : AppBundle
 		
-		if let helpersBundle = selectedBundle.pathForResource("IO_IOS_Helpers", ofType: "bundle") {
-			if let helperResourcesBundle = NSBundle(path: helpersBundle) {
+		if let helpersBundle = selectedBundle.path(forResource: "IO_IOS_Helpers", ofType: "bundle") {
+			if let helperResourcesBundle = Bundle(path: helpersBundle) {
 			
-				if let errorCodesPath = helperResourcesBundle.pathForResource("ErrorMessages", ofType: "plist") {
+				if let errorCodesPath = helperResourcesBundle.path(forResource: "ErrorMessages", ofType: "plist") {
 				
 					let dictionary = NSDictionary(contentsOfFile: errorCodesPath)
-					let errorData: NSDictionary	= dictionary?.objectForKey(String(errorCode)) as! NSDictionary
-					return (errorData.objectForKey("title") as? String, errorData.objectForKey("message") as? String, errorData.objectForKey("cancelButtonTitle") as? String);
+					let errorData: NSDictionary	= dictionary?.object(forKey: String(errorCode)) as! NSDictionary
+					return (errorData.object(forKey: "title") as? String, errorData.object(forKey: "message") as? String, errorData.object(forKey: "cancelButtonTitle") as? String);
 				}else{
 					NSLog("\n-------------\nWarning!\n-------------\nPlist ErrorMessages could not exists in the IO_IOS_Helpers bundle!\n")
 					abort()
@@ -73,23 +73,23 @@ public class IO_Helpers: NSObject {
 	}
 	
 	/// Return media cache directory
-	public static var getMediaCacheDirectory : String? {
+	open static var getMediaCacheDirectory : String? {
 		
 		get {
 			
-			let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+			let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
 			
 			if paths.count > 0 {
 				
 				let cacheDirectory = paths[0]
 				
 				let CacheDirectoryName = IO_Helpers.getSettingValue("cacheDirectoryName")
-				let mediaCachePath = NSString(string: cacheDirectory).stringByAppendingPathComponent(CacheDirectoryName)
+				let mediaCachePath = NSString(string: cacheDirectory).appendingPathComponent(CacheDirectoryName)
 				
-				if(!NSFileManager.defaultManager().fileExistsAtPath(mediaCachePath)) {
+				if(!FileManager.default.fileExists(atPath: mediaCachePath)) {
 					
 					do {
-						try NSFileManager.defaultManager().createDirectoryAtPath(mediaCachePath, withIntermediateDirectories: true, attributes: nil)
+						try FileManager.default.createDirectory(atPath: mediaCachePath, withIntermediateDirectories: true, attributes: nil)
 					} catch _ {
 					}
 				}
@@ -102,24 +102,25 @@ public class IO_Helpers: NSObject {
 	}
 	
 	/// Get screen resolution (CGFloat, CGFloat)
-	public static func getResolution() -> (CGFloat, CGFloat) {
+	open static func getResolution() -> (CGFloat, CGFloat) {
 		
-		return (UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height);
+		return (UIScreen.main.bounds.width, UIScreen.main.bounds.height);
 	}
 	
 	/// gerate random alphanumeric string
-	public static func generateRandomAlphanumeric(characterCount: Int) -> String
-	{
+	open static func generateRandomAlphanumeric(_ characterCount: Int) -> String {
+		
 		let characterSet	= "123456789abcdefghijkmnpqrstuvyz"
 		var randomString	= ""
 		
-		for(var i = 0; i < characterCount; i++)
-		{
-			let randomNumber		= IO_Helpers.randomInt(0, max: characterSet.characters.count - 1)
-			let endIdx				= randomNumber + 1
-			let selectedCharacter	= characterSet.substringWithRange(Range<String.Index>(start: characterSet.startIndex.advancedBy(randomNumber), end: characterSet.startIndex.advancedBy(endIdx)))
+		for _ in 0..<characterCount {
 			
-			//characterSet.substringWithRange(Range<String.Index>(start: advance(randomNumber, 1), end: advance(randomNumber + 1, 0)))
+			let randomNumber = IO_Helpers.randomInt(0, max: characterSet.characters.count - 1)
+			let endIdx = randomNumber + 1
+			let _startIdx = characterSet.characters.index(characterSet.startIndex, offsetBy: randomNumber)
+			let _endIdx = characterSet.characters.index(characterSet.startIndex, offsetBy: endIdx)
+			let rangeString = Range<String.Index>(_startIdx..<_endIdx)
+			let selectedCharacter = characterSet.substring(with: rangeString)
 			randomString	+= selectedCharacter
 		}
 		
@@ -127,7 +128,8 @@ public class IO_Helpers: NSObject {
 	}
 	
 	/// Generate random integer
-	public static func randomInt(var min: Int, var max:Int) -> Int {
+	public static func randomInt(_ min: Int, max:Int) -> Int {
+		var min = min, max = max
         
         if(max < min)
         {
@@ -145,63 +147,35 @@ public class IO_Helpers: NSObject {
         
 		return min + Int(arc4random_uniform(UInt32(diff)))
 	}
-    
-    /*
-    public static func randomDouble(var min:Double , var max:Double)->Double {
-        
-        if(max < min)
-        {
-            // swap
-            let temp = min
-            min = max
-            max = temp
-        }
-        else if(max == min)
-        {
-            return min
-        }
-
-        let diff:Double = Double(abs(max - min))
-      
-        let
-        
-        var randDouble = min + Double(arc4random())%diff
-        
-        randDouble = drand48()
-        
-        return randDouble
-    
-    }
-    */
 	
 	/// Convert radians to degrees for location
-	public static func mathDegrees(radians : Double) -> Double {
+	open static func mathDegrees(_ radians : Double) -> Double {
 		return (radians * (180.0 / Double(M_PI)))
 	}
 	
 	/// Convert degrees to radians for location
-	public func mathRadians(degrees : Double) ->Double {
+	open func mathRadians(_ degrees : Double) ->Double {
 		return (degrees / (180.0 * Double(M_PI)))
 	}
 	
 	/// Convert miles to kilometers
-	public func convertMilesToKilemoters(miles: Double) -> Double {
+	open func convertMilesToKilemoters(_ miles: Double) -> Double {
 		return miles * 1.60934
 	}
 	
 	/// Get setting value from Settings.plist
-	public static func getSettingValue(settingKey: String, bundle: NSBundle? = nil) -> String {
+	open static func getSettingValue(_ settingKey: String, bundle: Bundle? = nil) -> String {
 		
 		let selectedBundle = (bundle != nil) ? bundle! : AppBundle
 		
-		if let helpersBundle = selectedBundle.pathForResource("IO_IOS_Helpers", ofType: "bundle") {
+		if let helpersBundle = selectedBundle.path(forResource: "IO_IOS_Helpers", ofType: "bundle") {
 			
-			if let helperResourcesBundle = NSBundle(path: helpersBundle) {
+			if let helperResourcesBundle = Bundle(path: helpersBundle) {
 			
-				if let plistPath = helperResourcesBundle.pathForResource("Settings", ofType: "plist") {
+				if let plistPath = helperResourcesBundle.path(forResource: "Settings", ofType: "plist") {
 				
 					let dictionary = NSDictionary(contentsOfFile: plistPath)
-					let settingValue: String = dictionary?.objectForKey(settingKey) as! String
+					let settingValue: String = dictionary?.object(forKey: settingKey) as! String
 					return settingValue
 				}else{
 					NSLog("\n-------------\nWarning!\n-------------\nPlist ErrorMessages could not exists in the IO_IOS_Helpers bundle!\n")
@@ -218,56 +192,20 @@ public class IO_Helpers: NSObject {
 	}
 }
 
-/// String extension
-extension String {
-	
-	/// Check string is e-mail
-	public func IO_isEmail() -> Bool {
-		let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .CaseInsensitive)
-		return regex?.firstMatchInString(self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
-	}
-	
-	/// md5 and trim extension for string
-	public func IO_md5() -> String! {
-		let str = self.cStringUsingEncoding(NSUTF8StringEncoding)
-		let strLen = CUnsignedInt(self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-		let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-		let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen)
-		
-		CC_MD5(str!, strLen, result)
-		
-		let hash = NSMutableString()
-		for i in 0..<digestLen {
-			hash.appendFormat("%02x", result[i])
-		}
-		
-		result.destroy()
-		
-		return String(format: hash as String)
-	}
-	
-	/// Trim whitespace from string
-	public func IO_condenseWhitespace() -> String {
-		let components = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({!$0.characters.isEmpty})
-		
-		return components.joinWithSeparator("")
-	}
-}
-
 /// uiview cntroller extensions
 extension UIViewController {
 	
 	/// Present modal view right to left animation
-	public func IO_presentViewControllerWithCustomAnimation(viewControllerToPresent: UIViewController!) {
-		let screenSizeWidth							= UIScreen.mainScreen().bounds.size.width
-		let startTransition							= CGAffineTransformMakeTranslation(screenSizeWidth, 0)
-		viewControllerToPresent.view.hidden			= true
-		self.presentViewController(viewControllerToPresent, animated: false, completion: { () -> Void in
+	public func IO_presentViewControllerWithCustomAnimation(_ viewControllerToPresent: UIViewController!) {
+		let screenSizeWidth							= UIScreen.main.bounds.size.width
+		let startTransition							= CGAffineTransform(translationX: screenSizeWidth, y: 0)
+		viewControllerToPresent.view.isHidden			= true
+		self.present(viewControllerToPresent, animated: false, completion: { () -> Void in
 			
-			viewControllerToPresent.view.hidden			= false
+			viewControllerToPresent.view.isHidden			= false
 			viewControllerToPresent.view.transform		= startTransition
-			let destinationTransform					= CGAffineTransformMakeTranslation(0, 0)
-			UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.05, options: [], animations: { () -> Void in
+			let destinationTransform					= CGAffineTransform(translationX: 0, y: 0)
+			UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.05, options: [], animations: { () -> Void in
 				
 				viewControllerToPresent.view.transform	= destinationTransform
 			}, completion: { finished in
@@ -281,16 +219,16 @@ extension UIViewController {
 	/// Dismiss modal view right to left animation
 	public func IO_dismissViewControllerWithCustomAnimation() {
 		
-		let screenSizeWidth							= UIScreen.mainScreen().bounds.size.width
-		let destinationTransform					= CGAffineTransformMakeTranslation(screenSizeWidth, 0)
+		let screenSizeWidth							= UIScreen.main.bounds.size.width
+		let destinationTransform					= CGAffineTransform(translationX: screenSizeWidth, y: 0)
 		
-		UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.05, options: [], animations: { () -> Void in
+		UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.05, options: [], animations: { () -> Void in
 			
 			self.view.transform					= destinationTransform
 		}, completion: { finished in
 				
 			self.view.transform					= destinationTransform
-			self.dismissViewControllerAnimated(false, completion: nil)
+			self.dismiss(animated: false, completion: nil)
 		})
 		
 	}
