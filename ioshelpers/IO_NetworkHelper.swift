@@ -10,15 +10,16 @@ import Foundation
 import Dispatch
 import AFNetworking
 
-typealias IO_NetworkResponseHandler = (_ success: Bool, _ data: AnyObject?, _ errorStr: String?) -> Void
+typealias IO_NetworkResponseHandler = (_ success: Bool, _ data: AnyObject?, _ errorStr: String?, _ statusCode: Int) -> Void
+typealias IO_NetworkImageHandler = (_ success: Bool, _ image: UIImage?, _ errorStr: String?, _ statusCode: Int) -> Void
 
 class IO_NetworkHelper {
 	
-	private var completitionHandler: IO_NetworkResponseHandler
+	private let maximumActiveDownloads = 7
 	
-	init(withGetRequest requestURL: String, completitionHandler: @escaping IO_NetworkResponseHandler) {
+	@discardableResult
+	init(getJSONRequest requestURL: String, completitionHandler: @escaping IO_NetworkResponseHandler) {
 		
-		self.completitionHandler = completitionHandler
 		let networkManager = AFURLSessionManager(sessionConfiguration: URLSessionConfiguration.default)
 		var request = URLRequest(url: URL(string: requestURL)!)
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -37,8 +38,9 @@ class IO_NetworkHelper {
 				
 				DispatchQueue.main.async(execute: { () -> Void in
 					
-					self.completitionHandler(false, nil, error?.localizedDescription)
-					let alertview = UIAlertView(title: "OOPS!", message: "Bir hata olustu. Lütfen daha sonra tekrar deneyin.", delegate: nil, cancelButtonTitle: "Tamam")
+					completitionHandler(false, nil, error?.localizedDescription, responseCode)
+					let alertMessage = IO_Helpers.getErrorMessageFromCode(9001)
+					let alertview = UIAlertView(title: alertMessage.0, message: alertMessage.1, delegate: nil, cancelButtonTitle: alertMessage.2)
 					alertview.show()
 				})
 				
@@ -51,10 +53,10 @@ class IO_NetworkHelper {
 					
 					if(error != nil) {
 						
-						self.completitionHandler(false, data as AnyObject?, error?.localizedDescription)
+						completitionHandler(false, data as AnyObject?, error?.localizedDescription, responseCode)
 					}else{
 						
-						self.completitionHandler(true, data as AnyObject?, nil)
+						completitionHandler(true, data as AnyObject?, nil, responseCode)
 					}
 				})
 			}
@@ -65,5 +67,51 @@ class IO_NetworkHelper {
 		#endif
 		
 		dataTask.resume()
+	}
+	
+	@discardableResult
+	init(downloadImage requestURL: String, completitionHandler: @escaping IO_NetworkImageHandler) {
+		
+		var request = URLRequest(url: URL(string: requestURL)!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 90)
+		request.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
+		
+		if let cachedImage = AFImageDownloader.defaultURLCache().cachedResponse(for: request) {
+			
+			let image = UIImage(data: cachedImage.data)
+			DispatchQueue.main.async(execute: { () -> Void in
+				
+				completitionHandler(true, image, nil, 200)
+			})
+		}else{
+			AFImageDownloader.defaultInstance().downloadImage(for: request, success: { (request, response, image) in
+				
+				DispatchQueue.main.async(execute: { () -> Void in
+					completitionHandler(true, image, nil, 200)
+				})
+				
+			}, failure: { (request, response, error) in
+				if let responseCode = response?.statusCode {
+					
+					if(responseCode < 200 || responseCode >= 300) {
+						
+						#if NETWORK_DEBUG
+							print("Internal server error! \(responseCode)\n")
+						#endif
+						
+						DispatchQueue.main.async(execute: { () -> Void in
+							
+							completitionHandler(false, nil, error.localizedDescription, responseCode)
+							let alertview = UIAlertView(title: "OOPS!", message: "Bir hata olustu. Lütfen daha sonra tekrar deneyin.", delegate: nil, cancelButtonTitle: "Tamam")
+							alertview.show()
+						})
+						
+					}
+				}else{
+					DispatchQueue.main.async(execute: { () -> Void in
+						completitionHandler(false, nil, error.localizedDescription, 0)
+					})
+				}
+			})
+		}
 	}
 }
