@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-extension UIImage {
+typealias IO_AsyncUIImage = (_ image: UIImage?) -> Void
 
+extension UIImage {
+	
 	func tintedWithLinearGradientColors(colorsArr: [CGColor?]) -> UIImage {
 		
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
@@ -37,4 +39,80 @@ extension UIImage {
 		return gradientImage!
 	}
 	
+	class func getWebImage(imageUrl: String, callback: IO_AsyncUIImage?) -> Void {
+	
+		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
+			
+			let cacheName = imageUrl.IO_md5()
+			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			
+			if(FileManager.default.fileExists(atPath: imageFilePath)) {
+				
+				let fileUrl = URL(fileURLWithPath: imageFilePath)
+				let fileData = try? Data(contentsOf: fileUrl)
+				let responseImage = UIImage(data: fileData!)
+				DispatchQueue.main.async {
+					
+					if(callback != nil) {
+						callback!(responseImage)
+					}
+				}
+			}else{
+				
+				IO_NetworkHelper.init(downloadFile: imageUrl, displayError: false, completitionHandler: { (success, fileUrl, error, responseCode) in
+					
+					if(success) {
+						
+						do {
+							
+							let fileData = try Data(contentsOf: fileUrl!)
+							let responseImage = UIImage(data: fileData)
+							responseImage?.storeToLocalCache(cacheName: cacheName!)
+							
+							DispatchQueue.main.async {
+								
+								if(callback != nil) {
+									callback!(responseImage)
+								}
+							}
+						} catch _ {
+						}
+					}
+				})
+				
+			}
+		}
+	}
+	
+	func storeToLocalCache(cacheName: String) {
+		
+		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
+			
+			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			if(!FileManager.default.fileExists(atPath: imageFilePath)) {
+					
+				let imageFileUrl = URL(fileURLWithPath: imageFilePath)
+				
+				/*imageFileUrl.setResourceValues()
+				URL.setResourceValues(&)
+				var resourceValues = imageFileUrl.setResourceValues(&imageFileUrl!)!
+				resourceValues.isExcludedFromBackup = true*/
+					
+				if let imageData = UIImagePNGRepresentation(self) {
+					
+					try? imageData.write(to: imageFileUrl, options: Data.WritingOptions.init(rawValue: 0))
+				}
+			}
+		}
+	}
+	
+	class func deleteFromCache(imageUrl: String) {
+	
+		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
+			
+			let cacheName = imageUrl.IO_md5()
+			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			try? FileManager.default.removeItem(atPath: imageFilePath)
+		}
+	}
 }

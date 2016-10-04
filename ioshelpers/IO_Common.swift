@@ -101,6 +101,35 @@ open class IO_Helpers: NSObject {
 		}
 	}
 	
+	/// Return media cache directory
+	open static var getDownloadsDirectory : String? {
+		
+		get {
+			
+			let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+			
+			if paths.count > 0 {
+				
+				let downloadDirectory = paths[0]
+				
+				let DownloadDirectoryName = IO_Helpers.getSettingValue("downloadDirectoryName")
+				let downloadDirPath = NSString(string: downloadDirectory).appendingPathComponent(DownloadDirectoryName)
+				
+				if(!FileManager.default.fileExists(atPath: downloadDirPath)) {
+					
+					do {
+						try FileManager.default.createDirectory(atPath: downloadDirPath, withIntermediateDirectories: true, attributes: nil)
+					} catch _ {
+					}
+				}
+				
+				return downloadDirPath as String
+			}else{
+				return nil
+			}
+		}
+	}
+	
 	/// Get screen resolution (CGFloat, CGFloat)
 	open static func getResolution() -> (CGFloat, CGFloat) {
 		

@@ -14,5 +14,7 @@
 	<string></string>
 	<key>productionServerBaseUrl</key>
 	<string></string>
+	<key>downloadDirectoryName</key>
+	<string>AppDownloads</string>
 </dict>
 </plist>

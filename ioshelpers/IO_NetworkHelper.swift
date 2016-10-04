@@ -11,7 +11,7 @@ import Dispatch
 import AFNetworking
 
 typealias IO_NetworkResponseHandler = (_ success: Bool, _ data: AnyObject?, _ errorStr: String?, _ statusCode: Int) -> Void
-typealias IO_NetworkImageHandler = (_ success: Bool, _ image: UIImage?, _ errorStr: String?, _ statusCode: Int) -> Void
+typealias IO_NetworkFileHandler = (_ success: Bool, _ filePath: URL?, _ errorStr: String?, _ statusCode: Int) -> Void
 
 class IO_NetworkHelper {
 	
@@ -70,48 +70,55 @@ class IO_NetworkHelper {
 	}
 	
 	@discardableResult
-	init(downloadImage requestURL: String, completitionHandler: @escaping IO_NetworkImageHandler) {
+	init(downloadFile requestURL: String, displayError: Bool, completitionHandler: @escaping IO_NetworkFileHandler) {
 		
+		let networkManager = AFURLSessionManager(sessionConfiguration: URLSessionConfiguration.default)
 		var request = URLRequest(url: URL(string: requestURL)!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 90)
 		request.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
 		
-		if let cachedImage = AFImageDownloader.defaultURLCache().cachedResponse(for: request) {
+		let fileDownloadTask = networkManager.downloadTask(with: request, progress: { (taskProgress) in
+			// pass
+		}, destination: { (fileUrl, urlResponse) -> URL in
 			
-			let image = UIImage(data: cachedImage.data)
-			DispatchQueue.main.async(execute: { () -> Void in
+			if let downloadsDirectory = IO_Helpers.getDownloadsDirectory {
 				
-				completitionHandler(true, image, nil, 200)
-			})
-		}else{
-			AFImageDownloader.defaultInstance().downloadImage(for: request, success: { (request, response, image) in
+				let filePath = downloadsDirectory + "/\(urlResponse.suggestedFilename!)"
+				return URL(fileURLWithPath: filePath)
+			}else{
+				return URL(fileURLWithPath: urlResponse.suggestedFilename!)
+			}
+			
+		}) { (urlResponse, fileUrl, error) in
+			
+			let httpResponse = urlResponse as! HTTPURLResponse
+			let responseCode = httpResponse.statusCode
 				
-				DispatchQueue.main.async(execute: { () -> Void in
-					completitionHandler(true, image, nil, 200)
-				})
-				
-			}, failure: { (request, response, error) in
-				if let responseCode = response?.statusCode {
+			if(responseCode < 200 || responseCode >= 300) {
+				#if NETWORK_DEBUG
+					print("Internal server error! \(responseCode)\n")
+				#endif
 					
-					if(responseCode < 200 || responseCode >= 300) {
+				DispatchQueue.main.async(execute: { () -> Void in
 						
-						#if NETWORK_DEBUG
-							print("Internal server error! \(responseCode)\n")
-						#endif
+					completitionHandler(false, nil, error?.localizedDescription, responseCode)
 						
-						DispatchQueue.main.async(execute: { () -> Void in
+					if(displayError) {
 							
-							completitionHandler(false, nil, error.localizedDescription, responseCode)
-							let alertview = UIAlertView(title: "OOPS!", message: "Bir hata olustu. Lütfen daha sonra tekrar deneyin.", delegate: nil, cancelButtonTitle: "Tamam")
-							alertview.show()
-						})
-						
+						let alertview = UIAlertView(title: "OOPS!", message: "Bir hata olustu. Lütfen daha sonra tekrar deneyin.", delegate: nil, cancelButtonTitle: "Tamam")
+						alertview.show()
 					}
-				}else{
-					DispatchQueue.main.async(execute: { () -> Void in
-						completitionHandler(false, nil, error.localizedDescription, 0)
-					})
-				}
-			})
+				})
+			}else{
+				
+				/*var resourceValues = URLResourceValues()
+				resourceValues.isExcludedFromBackup = true
+				try? fileUrl?.setResourceValues(resourceValues.allValues)*/
+				DispatchQueue.main.async(execute: { () -> Void in
+					completitionHandler(true, fileUrl, error?.localizedDescription, 200)
+				})
+			}
+			
 		}
+		fileDownloadTask.resume()
 	}
 }
