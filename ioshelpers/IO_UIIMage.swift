@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-typealias IO_AsyncUIImage = (_ image: UIImage?) -> Void
+public typealias IO_AsyncUIImage = (_ image: UIImage?) -> Void
 
 extension UIImage {
 	
-	func tintedWithLinearGradientColors(colorsArr: [CGColor?]) -> UIImage {
+	public func tintedWithLinearGradientColors(colorsArr: [CGColor?]) -> UIImage {
 		
 		UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 		let context = UIGraphicsGetCurrentContext()
@@ -39,12 +39,12 @@ extension UIImage {
 		return gradientImage!
 	}
 	
-	class func getWebImage(imageUrl: String, callback: IO_AsyncUIImage?) -> Void {
+	public class func getWebImage(imageUrl: String, callback: IO_AsyncUIImage?) -> Void {
 	
 		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
 			
 			let cacheName = imageUrl.IO_md5()
-			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			let imageFilePath = cacheDirectory + "/\(cacheName!)" + ".cim"
 			
 			if(FileManager.default.fileExists(atPath: imageFilePath)) {
 				
@@ -61,7 +61,7 @@ extension UIImage {
 				
 				IO_NetworkHelper.init(downloadFile: imageUrl, displayError: false, completitionHandler: { (success, fileUrl, error, responseCode) in
 					
-					if(success) {
+					if(success && fileUrl != nil) {
 						
 						do {
 							
@@ -84,11 +84,11 @@ extension UIImage {
 		}
 	}
 	
-	func storeToLocalCache(cacheName: String) {
+	public func storeToLocalCache(cacheName: String) {
 		
 		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
 			
-			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			let imageFilePath = cacheDirectory + "/\(cacheName)" + ".cim"
 			if(!FileManager.default.fileExists(atPath: imageFilePath)) {
 					
 				let imageFileUrl = URL(fileURLWithPath: imageFilePath)
@@ -106,12 +106,12 @@ extension UIImage {
 		}
 	}
 	
-	class func deleteFromCache(imageUrl: String) {
+	public class func deleteFromCache(imageUrl: String) {
 	
 		if let cacheDirectory = IO_Helpers.getMediaCacheDirectory {
 			
 			let cacheName = imageUrl.IO_md5()
-			let imageFilePath = cacheDirectory.appending(cacheDirectory + "/\(cacheName)" + ".cim")
+			let imageFilePath = cacheDirectory + "/\(cacheName!)" + ".cim"
 			try? FileManager.default.removeItem(atPath: imageFilePath)
 		}
 	}

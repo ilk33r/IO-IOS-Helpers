@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import CommonCryptoiOS
+#elseif os(tvOS)
+import CommonCryptoTVOS
+#endif
+
 /// String extension
 extension String {
 	
@@ -19,8 +25,10 @@ extension String {
 	
 	/// md5 and trim extension for string
 	public func IO_md5() -> String! {
+		
 		let str = self.cString(using: String.Encoding.utf8)
 		let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))
+		
 		let digestLen = Int(CC_MD5_DIGEST_LENGTH)
 		let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
 		

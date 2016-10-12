@@ -15,38 +15,38 @@ private let iosVersion = NSString(string: Device.systemVersion).doubleValue
 private let AppBundle = Bundle.main
 
 /// Helpers class
-open class IO_Helpers: NSObject {
+public class IO_Helpers: NSObject {
 	
 	/// Return bundle id
-	open static let bundleID = AppBundle.bundleIdentifier!
+	public static let bundleID = AppBundle.bundleIdentifier!
 	
 	/// Is iOS 10
-	open static let iOS10 = iosVersion >= 10
+	public static let iOS10 = iosVersion >= 10
 	/// Is iOS 9
-	open static let iOS9 = iosVersion >= 9 && iosVersion < 10
+	public static let iOS9 = iosVersion >= 9 && iosVersion < 10
 	/// Is iOS 8
-	open static let iOS8 = iosVersion >= 8 && iosVersion < 9
+	public static let iOS8 = iosVersion >= 8 && iosVersion < 9
 	/// Is iOS 7
-	open static let iOS7 = iosVersion >= 7 && iosVersion < 8
+	public static let iOS7 = iosVersion >= 7 && iosVersion < 8
 	
 	/// Returns device uuid
-	open static let deviceUUID = Device.identifierForVendor!.uuidString
+	public static let deviceUUID = Device.identifierForVendor!.uuidString
 	
 	/// Returns application name
-	open static let applicationName = AppBundle.infoDictionary!["CFBundleName"] as! String
+	public static let applicationName = AppBundle.infoDictionary!["CFBundleName"] as! String
 	
 	/// Returns application version
-	open static let applicationVersion = (AppBundle.infoDictionary!["CFBundleShortVersionString"] as! String) + " (" + (AppBundle.infoDictionary!["CFBundleVersion"] as! String) + ")"
+	public static let applicationVersion = (AppBundle.infoDictionary!["CFBundleShortVersionString"] as! String) + " (" + (AppBundle.infoDictionary!["CFBundleVersion"] as! String) + ")"
 	
 	/// Returns device name
-	open static let deviceName = Device.name
+	public static let deviceName = Device.name
 	/// Returns device model
-	open static let devicModel = Device.model
+	public static let devicModel = Device.model
 	/// Returns device version
-	open static let deviceVersion = "\(iosVersion)"
+	public static let deviceVersion = "\(iosVersion)"
 	
 	/// Get error message (title, message, cancel button title)
-	open static func getErrorMessageFromCode(_ errorCode : Int, bundle: Bundle? = nil) -> (String?, String?, String?) {
+	public static func getErrorMessageFromCode(_ errorCode : Int, bundle: Bundle? = nil) -> (String?, String?, String?) {
 		
 		let selectedBundle = (bundle != nil) ? bundle! : AppBundle
 		
@@ -73,7 +73,7 @@ open class IO_Helpers: NSObject {
 	}
 	
 	/// Return media cache directory
-	open static var getMediaCacheDirectory : String? {
+	public static var getMediaCacheDirectory : String? {
 		
 		get {
 			
@@ -102,7 +102,7 @@ open class IO_Helpers: NSObject {
 	}
 	
 	/// Return media cache directory
-	open static var getDownloadsDirectory : String? {
+	public static var getDownloadsDirectory : String? {
 		
 		get {
 			
@@ -131,13 +131,13 @@ open class IO_Helpers: NSObject {
 	}
 	
 	/// Get screen resolution (CGFloat, CGFloat)
-	open static func getResolution() -> (CGFloat, CGFloat) {
+	public static func getResolution() -> (CGFloat, CGFloat) {
 		
 		return (UIScreen.main.bounds.width, UIScreen.main.bounds.height);
 	}
 	
 	/// gerate random alphanumeric string
-	open static func generateRandomAlphanumeric(_ characterCount: Int) -> String {
+	public static func generateRandomAlphanumeric(_ characterCount: Int) -> String {
 		
 		let characterSet	= "123456789abcdefghijkmnpqrstuvyz"
 		var randomString	= ""
@@ -178,22 +178,22 @@ open class IO_Helpers: NSObject {
 	}
 	
 	/// Convert radians to degrees for location
-	open static func mathDegrees(_ radians : Double) -> Double {
+	public static func mathDegrees(_ radians : Double) -> Double {
 		return (radians * (180.0 / Double(M_PI)))
 	}
 	
 	/// Convert degrees to radians for location
-	open func mathRadians(_ degrees : Double) ->Double {
+	public func mathRadians(_ degrees : Double) ->Double {
 		return (degrees / (180.0 * Double(M_PI)))
 	}
 	
 	/// Convert miles to kilometers
-	open func convertMilesToKilemoters(_ miles: Double) -> Double {
+	public func convertMilesToKilemoters(_ miles: Double) -> Double {
 		return miles * 1.60934
 	}
 	
 	/// Get setting value from Settings.plist
-	open static func getSettingValue(_ settingKey: String, bundle: Bundle? = nil) -> String {
+	public static func getSettingValue(_ settingKey: String, bundle: Bundle? = nil) -> String {
 		
 		let selectedBundle = (bundle != nil) ? bundle! : AppBundle
 		
