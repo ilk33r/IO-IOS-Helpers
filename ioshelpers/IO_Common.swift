@@ -8,10 +8,18 @@
 //
 
 import Foundation
-import UIKit
 
+#if os(iOS)
+import UIKit
+#endif
+
+#if os(iOS)
 private let Device = UIDevice.current
 private let iosVersion = NSString(string: Device.systemVersion).doubleValue
+#elseif os(tvOS)
+private let Device = UIDevice.current
+private let tvosVersion = NSString(string: Device.systemVersion).doubleValue
+#endif
 private let AppBundle = Bundle.main
 
 /// Helpers class
@@ -20,6 +28,7 @@ public class IO_Helpers: NSObject {
 	/// Return bundle id
 	public static let bundleID = AppBundle.bundleIdentifier!
 	
+#if os(iOS)
 	/// Is iOS 10
 	public static let iOS10 = iosVersion >= 10
 	/// Is iOS 9
@@ -31,6 +40,12 @@ public class IO_Helpers: NSObject {
 	
 	/// Returns device uuid
 	public static let deviceUUID = Device.identifierForVendor!.uuidString
+#elseif os(tvOS)
+	/// Is tvOS 10
+	public static let tvOS10 = tvosVersion >= 10
+	/// Is tvOS 9
+	public static let tvOS9 = tvosVersion >= 9 && tvosVersion < 10
+#endif
 	
 	/// Returns application name
 	public static let applicationName = AppBundle.infoDictionary!["CFBundleName"] as! String
@@ -38,12 +53,25 @@ public class IO_Helpers: NSObject {
 	/// Returns application version
 	public static let applicationVersion = (AppBundle.infoDictionary!["CFBundleShortVersionString"] as! String) + " (" + (AppBundle.infoDictionary!["CFBundleVersion"] as! String) + ")"
 	
+#if os(iOS)
 	/// Returns device name
 	public static let deviceName = Device.name
 	/// Returns device model
 	public static let devicModel = Device.model
 	/// Returns device version
 	public static let deviceVersion = "\(iosVersion)"
+	/// Returns device os
+	public static let deviceOS = "iOS"
+#elseif os(tvOS)
+	/// Returns device name
+	public static let deviceName = Device.name
+	/// Returns device model
+	public static let devicModel = Device.model
+	/// Returns device version
+	public static let deviceVersion = "\(tvosVersion)"
+	/// Returns device os
+	public static let deviceOS = "tvOS"
+#endif
 	
 	/// Get error message (title, message, cancel button title)
 	public static func getErrorMessageFromCode(_ errorCode : Int, bundle: Bundle? = nil) -> (String?, String?, String?) {
@@ -130,11 +158,13 @@ public class IO_Helpers: NSObject {
 		}
 	}
 	
+#if os(iOS)
 	/// Get screen resolution (CGFloat, CGFloat)
 	public static func getResolution() -> (CGFloat, CGFloat) {
 		
 		return (UIScreen.main.bounds.width, UIScreen.main.bounds.height);
 	}
+#endif
 	
 	/// gerate random alphanumeric string
 	public static func generateRandomAlphanumeric(_ characterCount: Int) -> String {
@@ -221,6 +251,7 @@ public class IO_Helpers: NSObject {
 	}
 }
 
+#if os(iOS)
 /// uiview cntroller extensions
 extension UIViewController {
 	
@@ -262,4 +293,5 @@ extension UIViewController {
 		
 	}
 }
+#endif
 
