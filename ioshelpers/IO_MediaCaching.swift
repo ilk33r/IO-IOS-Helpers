@@ -68,7 +68,7 @@ private class IO_MediaCachingRequestUrls {
 }
 
 /// Media Caching
-open class IO_MediaCaching: NSObject {
+open class IO_MediaCaching: NSObject, NSURLConnectionDataDelegate {
 	
 	fileprivate var tryCount = 0
 	fileprivate var cachingCompletitionHandler : IO_MediaCachingResponseHandler!
@@ -138,7 +138,7 @@ open class IO_MediaCaching: NSObject {
 	}
 	
 	// request complete
-	func connection(_ connection: NSURLConnection, didReceiveResponse response: URLResponse) {
+	public func connection(_ connection: NSURLConnection, didReceive response: URLResponse) {
 		
 		let httpResponse = response as! HTTPURLResponse
 		let code = httpResponse.statusCode
@@ -171,7 +171,7 @@ open class IO_MediaCaching: NSObject {
 	}
 	
 	// image downloading
-	func connection(_ connection: NSURLConnection, didReceiveData data: Data) {
+	public func connection(_ connection: NSURLConnection, didReceive data: Data) {
 		if (data.count == 0) {
 			return;
 		}
@@ -180,7 +180,7 @@ open class IO_MediaCaching: NSObject {
 	}
 	
 	// download complete
-	func connectionDidFinishLoading(_ connection: NSURLConnection) {
+	public func connectionDidFinishLoading(_ connection: NSURLConnection) {
 		
 		RunLoop.current.cancelPerformSelectors(withTarget: self)
 		UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -203,7 +203,7 @@ open class IO_MediaCaching: NSObject {
 	}
 	
 	// download failed
-	func connection(_ connection: NSURLConnection, didFailWithError error: NSError) {
+	public func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
 		
 		RunLoop.current.cancelPerformSelectors(withTarget: self)
 		UIApplication.shared.isNetworkActivityIndicatorVisible = false

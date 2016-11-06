@@ -73,6 +73,9 @@ public class IO_Helpers: NSObject {
 	public static let deviceOS = "tvOS"
 #endif
 	
+	public static let preferedLanguage = Locale.preferredLanguages.first
+	public static let deviceLocale = Locale.current.languageCode
+	
 	/// Get error message (title, message, cancel button title)
 	public static func getErrorMessageFromCode(_ errorCode : Int, bundle: Bundle? = nil) -> (String?, String?, String?) {
 		
