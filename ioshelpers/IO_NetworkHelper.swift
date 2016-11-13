@@ -74,16 +74,85 @@ public class IO_NetworkHelper {
 				
 				DispatchQueue.main.async(execute: { () -> Void in
 					
+					guard completitionHandler != nil else {
+						
+						return
+					}
+					
 					if(error != nil) {
 						
-						if(completitionHandler != nil) {
-							completitionHandler!(false, data as AnyObject?, error?.localizedDescription, responseCode)
-						}
+						completitionHandler!(false, data as AnyObject?, error?.localizedDescription, responseCode)
 					}else{
 						
-						if(completitionHandler != nil) {
-							completitionHandler!(true, data as AnyObject?, nil, responseCode)
-						}
+						completitionHandler!(true, data as AnyObject?, nil, responseCode)
+					}
+				})
+			}
+			
+		}
+		#if NETWORK_DEBUG
+			print("Request will start! \(requestURL)\n")
+		#endif
+		
+		dataTask.resume()
+	}
+	
+	@discardableResult
+	public init(getAnyRequest requestURL: String, accept: String, completitionHandler: IO_NetworkResponseHandler?) {
+		
+		let networkManager = AFURLSessionManager(sessionConfiguration: URLSessionConfiguration.default)
+		var request = URLRequest(url: URL(string: requestURL)!)
+		request.addValue(accept, forHTTPHeaderField: "Accept")
+		request.addValue("gzip, deflate", forHTTPHeaderField: "Accept-Encoding")
+		
+		let responseSerializer = AFHTTPResponseSerializer()
+		responseSerializer.stringEncoding = String.Encoding.utf8.rawValue
+		
+		networkManager.responseSerializer = responseSerializer
+		
+		let dataTask = networkManager.dataTask(with: request) { (response, data, error) in
+			
+			let httpResponse = response as! HTTPURLResponse
+			let responseCode = httpResponse.statusCode
+			
+			if(responseCode < 200 || responseCode >= 300) {
+				
+				#if NETWORK_DEBUG
+					print("Internal server error! \(responseCode)\n")
+				#endif
+				
+				DispatchQueue.main.async(execute: { () -> Void in
+					
+					if(completitionHandler != nil) {
+						
+						completitionHandler!(false, nil, error?.localizedDescription, responseCode)
+					}
+					
+					#if os(iOS)
+						let alertMessage = IO_Helpers.getErrorMessageFromCode(9001)
+						let alertview = UIAlertView(title: alertMessage.0, message: alertMessage.1, delegate: nil, cancelButtonTitle: alertMessage.2)
+						alertview.show()
+					#endif
+				})
+				
+			}else{
+				#if NETWORK_DEBUG
+					print("Connection receive response! \(responseCode)\n \(data)")
+				#endif
+				
+				DispatchQueue.main.async(execute: { () -> Void in
+					
+					guard completitionHandler != nil else {
+						
+						return
+					}
+					
+					if(error != nil) {
+						
+						completitionHandler!(false, data as AnyObject?, error?.localizedDescription, responseCode)
+					}else{
+						
+						completitionHandler!(true, data as AnyObject?, nil, responseCode)
 					}
 				})
 			}
@@ -140,16 +209,17 @@ public class IO_NetworkHelper {
 				
 				DispatchQueue.main.async(execute: { () -> Void in
 					
+					guard completitionHandler != nil else {
+						
+						return
+					}
+					
 					if(error != nil) {
 						
-						if(completitionHandler != nil) {
-							completitionHandler!(false, data as AnyObject?, error?.localizedDescription, responseCode)
-						}
+						completitionHandler!(false, data as AnyObject?, error?.localizedDescription, responseCode)
 					}else{
 						
-						if(completitionHandler != nil) {
-							completitionHandler!(true, data as AnyObject?, nil, responseCode)
-						}
+						completitionHandler!(true, data as AnyObject?, nil, responseCode)
 					}
 				})
 			}
