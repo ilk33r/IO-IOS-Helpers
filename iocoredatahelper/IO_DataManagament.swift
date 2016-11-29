@@ -12,8 +12,8 @@ import Foundation
 /// Core data helper class
 public class IO_DataManagement {
 	
-	private let databaseName: String
-	private let databaseResourceName: String
+	let databaseName: String
+	let databaseResourceName: String
 	
 	struct DataManagementVariables {
 		
@@ -44,16 +44,16 @@ public class IO_DataManagement {
 	}
  
 	// MARK: - Core Data stack
-	private lazy var applicationDocumentsDirectory: NSURL = {
+	private lazy var applicationDocumentsDirectory: URL = {
 		// The directory the application uses to store the Core Data store file.
-		let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+		let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 		return urls[urls.count-1] 
 		}()
 	
 	private func _managedObjectModel() -> NSManagedObjectModel {
 		// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-		let modelURL = NSBundle.mainBundle().URLForResource(self.databaseResourceName, withExtension: "momd")!
-		return NSManagedObjectModel(contentsOfURL: modelURL)!
+		let modelURL = Bundle.main.url(forResource: self.databaseResourceName, withExtension: "momd")!
+		return NSManagedObjectModel(contentsOf: modelURL)!
 	}
 	
 	/// Get NSManagedObjectModel
@@ -104,21 +104,21 @@ public class IO_DataManagement {
 		// The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
 		// Create the coordinator and store
 		var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-		let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.databaseName)
+		let url = self.applicationDocumentsDirectory.appendingPathComponent(self.databaseName)
 		var error: NSError? = nil
 		let options			= [NSMigratePersistentStoresAutomaticallyOption : true, NSInferMappingModelAutomaticallyOption : true]
 		do {
-			try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+			try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
 		} catch let error1 as NSError {
 			error = error1
 			// Replace this with code to handle the error appropriately.
 			NSLog("\n\n Warning! \n Database completly changed!!!!!\n Core Data migration or versioning rules not found \n Application will be crashed!\n\n*****************\n")
-			print(error?.description)
+			print(error?.description ?? "An error occured!")
 
 			#if CORE_DATA_DEVELOPMENT
 			// delete local database and recreate it.
 			do {
-				try NSFileManager.defaultManager().removeItemAtURL(url)
+				try FileManager.default.removeItem(at: url)
 			} catch {
 				print("File manager error!");
 			}
@@ -137,10 +137,10 @@ public class IO_DataManagement {
 	/// Delete database
 	public func deleteSql() {
 		
-		_	= NSBundle.mainBundle().URLForResource(self.databaseResourceName, withExtension: "momd")!
-		let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.databaseName)
+		_	= Bundle.main.url(forResource: self.databaseResourceName, withExtension: "momd")!
+		let url = self.applicationDocumentsDirectory.appendingPathComponent(self.databaseName)
 		do {
-			try NSFileManager.defaultManager().removeItemAtURL(url)
+			try FileManager.default.removeItem(at: url)
 		} catch _ {
 		}
 		DataManagementVariables.ManagedObjectContext = nil
