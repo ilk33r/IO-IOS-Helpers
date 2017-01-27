@@ -26,6 +26,7 @@ import UIKit
 	}
 	@IBInspectable var borderWidth:CGFloat {
 		set {
+			self.layoutIfNeeded()
 			layer.borderWidth = newValue
 		}
 		get {
@@ -34,6 +35,7 @@ import UIKit
 	}
 	@IBInspectable var cornerRadius:CGFloat {
 		set {
+			self.layoutIfNeeded()
 			layer.cornerRadius = newValue
 			clipsToBounds = newValue > 0
 		}

@@ -252,5 +252,47 @@ public class IO_Helpers: NSObject {
 			abort()
 		}
 	}
+	
+	public static func getTimeAgoString(dateDiff: Int) -> Dictionary<String, Int> {
+		
+		var retval = Dictionary<String, Int>()
+		
+		if(dateDiff > 59) {
+			
+			let elapsedMinutes = Int(dateDiff) / 60
+			
+			if(elapsedMinutes > 59) {
+				
+				let elapsedHours	= Int(elapsedMinutes) / 60
+				
+				if(elapsedHours > 24) {
+					
+					let elapsedDays = Int(elapsedHours) / 24
+					retval["days"] = elapsedDays
+					retval["hours"] = Int(elapsedDays) % 24
+					retval["minutes"] = Int(retval["hours"]!) % 60
+					retval["minutes"] = 0
+				}else{
+					retval["days"] = 0
+					retval["hours"] = elapsedHours
+					retval["minutes"] = Int(elapsedMinutes) % 60
+					retval["seconds"] = Int(dateDiff) % 60
+				}
+			}else{
+				retval["days"] = 0
+				retval["hours"] = 0
+				retval["minutes"] = elapsedMinutes
+				retval["seconds"] = Int(dateDiff) % 60
+			}
+			
+		}else{
+			retval["days"] = 0
+			retval["hours"] = 0
+			retval["minutes"] = 0
+			retval["seconds"] = dateDiff
+		}
+		
+		return retval
+	}
 }
 
